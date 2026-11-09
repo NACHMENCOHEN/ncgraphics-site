@@ -71,12 +71,12 @@ nav .in{display:flex;align-items:center;justify-content:space-between;height:78p
 @media (max-width:960px){.links{display:none}}
 
 /* hero */
-.hero{padding:120px 0 0;overflow:hidden}
+.hero{padding:140px 0 0;overflow:hidden}
 .hero .name{font-size:clamp(64px,15vw,250px);text-align:center;white-space:nowrap;display:flex;justify-content:center;overflow:hidden}
 .hero .name>span{display:inline-block}
 .hero .name .ch{display:inline-block;animation:up .9s cubic-bezier(.2,.8,.2,1) both,wave 8s ease-in-out 2.5s infinite;transition:color .15s}
 .hero .name .ch:hover{color:var(--gold-hi)}
-@keyframes wave{0%,8%,100%{transform:none;color:var(--ivory)}4%{transform:translateY(-7%);color:var(--gold-hi)}}
+@keyframes wave{0%,8%,100%{transform:none}4%{transform:translateY(-7%)}}
 @keyframes up{from{transform:translateY(100%)}}
 @keyframes fade{from{opacity:0;transform:translateY(14px)}}
 .hero-sub{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center;margin-top:18px;padding-top:18px;border-top:1px solid var(--line);animation:fade .8s .5s both}
@@ -284,7 +284,8 @@ header,section,footer,.bigtype-wrap{position:relative;z-index:1}
 
 /* ===== particles canvas ===== */
 #gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.gl .hero .name{opacity:0}
+.hero .name .ch{background:linear-gradient(180deg,#fff4cc 0%,var(--gold-hi) 32%,var(--gold) 62%,#8a6a24 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 10px 30px rgba(201,162,74,.25))}
+.hero .name .ch:hover{filter:brightness(1.25) drop-shadow(0 10px 30px rgba(236,210,144,.45))}
 .work,.security,.packages{background:rgba(22,20,16,.5)!important}
 /* ===== preloader ===== */
 #pre{display:none}
@@ -429,7 +430,6 @@ h2{letter-spacing:-.015em;line-height:.92}
   .js .rv,.js .wd{transform:none}
   #gl,.cur,.cur-dot,#pre{display:none!important}
   .zoom{height:auto}.zoom-sticky{position:relative;height:auto;min-height:80vh}.zoom-mask,.zoom-hint{display:none}.zoom-say{position:relative;opacity:1;min-height:80vh}
-  .gl .hero .name{opacity:1}
   .hs-track .proj .vp,.hs-track .proj .dash{clip-path:none}
 }
 </style>
@@ -808,7 +808,7 @@ h2{letter-spacing:-.015em;line-height:.92}
     if(reduce){root.classList.add('ready');return;}
     var t0=performance.now(),loaded=false,done=false;
     (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){loaded=true;});
-    setTimeout(function(){loaded=true;},3500);
+    setTimeout(function(){loaded=true;},2200);
     (function tick(){var el=performance.now()-t0,k=Math.min(1,el/1400);if(!loaded)k=Math.min(k,.9);var v=Math.round((1-Math.pow(1-k,3))*100);n.textContent=v;bar.style.width=v+'%';
       if(k>=1&&loaded&&!done){done=true;setTimeout(function(){root.classList.add('ready');startGL();setTimeout(function(){pre.style.display='none';},1300);},150);}else requestAnimationFrame(tick);})();
   })();
@@ -840,16 +840,12 @@ h2{letter-spacing:-.015em;line-height:.92}
     function rnd(a,b){return a+Math.random()*(b-a);}
     function build(){
       W=innerWidth;H=innerHeight;var m=Math.min(W,H);S=[];
-      /* 0: the name, sampled from the real headline */
-      var h=document.querySelector('.hero .name'),r=h.getBoundingClientRect(),cs=getComputedStyle(h);
-      var oc=document.createElement('canvas'),ow=Math.ceil(W),oh=Math.ceil(r.height+40);oc.width=ow;oc.height=oh;var ox=oc.getContext('2d');
-      ox.fillStyle='#fff';ox.textAlign='center';ox.textBaseline='middle';ox.font=cs.fontWeight+' '+cs.fontSize+' '+cs.fontFamily;
-      ox.fillText(h.textContent.replace(/ /g,' ').toUpperCase(),r.left+r.width/2,oh/2);
-      var data=ox.getImageData(0,0,ow,oh).data,hits=[],step=mobile?2:2;
-      for(var y=0;y<oh;y+=step)for(var x=0;x<ow;x+=step){if(data[(y*ow+x)*4+3]>140)hits.push(x,y);}
-      TEXTY=r.top+scrollY+r.height/2-oh/2;
+      /* 0: a gold halo of dust around the coin */
+      var cw=document.getElementById('coinWrap'),cr=cw?cw.getBoundingClientRect():{left:W/2-150,top:H*.4,width:300,height:300};
+      var ccx=cr.left+cr.width/2-W/2,ccy=cr.top+scrollY+cr.height/2,R0=cr.width*.42;TEXTY=0;
       var a0=new Float32Array(N*3);
-      for(i=0;i<N;i++){var k=hits.length?((Math.random()*hits.length/2)|0)*2:0;a0[i*3]=(hits[k]||0)-W/2+rnd(-.8,.8);a0[i*3+1]=H/2-(TEXTY+(hits[k+1]||0));a0[i*3+2]=rnd(-14,14);}
+      for(i=0;i<N;i++){var an0=Math.random()*6.283,wide=Math.random()<.22,rr0=wide?R0*(1.6+Math.random()*3.2):R0*(1.18+Math.pow(Math.random(),1.8)*.9);
+        a0[i*3]=ccx+Math.cos(an0)*rr0;a0[i*3+1]=H/2-ccy+Math.sin(an0)*rr0*(wide?.7:1);a0[i*3+2]=rnd(-60,60);}
       S.push(a0);
       /* 1: galaxy */
       var a1=new Float32Array(N*3);for(i=0;i<N;i++){var arm=i%3,rr=Math.pow(Math.random(),.6)*m*.62,an=rr*.011+arm*2.094+rnd(-.35,.35)*(1-rr/(m*.7));a1[i*3]=Math.cos(an)*rr;a1[i*3+1]=rnd(-12,12)*(1-rr/m);a1[i*3+2]=Math.sin(an)*rr;}S.push(a1);
@@ -888,7 +884,7 @@ h2{letter-spacing:-.015em;line-height:.92}
       else if(target===3){rotT.x=0;spin+=dt*.35;rotT.y=spin;rotT.z=.18;}
       else if(target===4){rotT.x=.3;spin+=dt*.25;rotT.y=spin;rotT.z=0;}
       else if(target===5){rotT.x=.0;rotT.y=Math.sin(t*.4)*.5;rotT.z=t*.15;}
-      else{spin=spin%6.283;rotT.x=0;rotT.y=isText?(mouse.x>-1e4?mouse.x/W*.25:0):0;rotT.z=0;}
+      else{spin=spin%6.283;rotT.x=0;rotT.y=0;rotT.z=0;}
       var lr=Math.min(1,dt*2.2);rot.x+=(rotT.x-rot.x)*lr;rot.y+=(rotT.y-rot.y)*lr;rot.z+=(rotT.z-rot.z)*lr;
       grp.rotation.set(rot.x,rot.y,rot.z);
       var opT=isText?1:.55;op+=(opT-op)*Math.min(1,dt*2);mat.opacity=op;
