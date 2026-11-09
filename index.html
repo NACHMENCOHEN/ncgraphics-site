@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NC Graphics</title>
+<meta name="description" content="NC Graphics builds websites, business systems and design. Secure by design. If you can describe it, we can build it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout idea: a black gallery inside an ivory frame. Towering condensed capitals, gold italic accents, the work itself shown large. Single dark world by choice. */
+  --bg:#0e0d0b;
+  --panel:#161410;
+  --ivory:#f2ebdc;
+  --gold:#c9a24a;
+  --gold-hi:#ecd290;
+  --muted:#9d9584;
+  --line:rgba(242,235,220,.14);
+  --tall:"Big Shoulders Display","Oswald","Arial Narrow",sans-serif;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --body:"Jost","Helvetica Neue",Arial,sans-serif;
+  --frame:10px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--ivory);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:1px solid var(--gold-hi);outline-offset:4px}
+.frame-edge{position:fixed;inset:0;border:var(--frame) solid var(--ivory);pointer-events:none;z-index:90}
+@media (max-width:700px){:root{--frame:6px}}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(22px,4vw,56px)}
+.tall{font-family:var(--tall);font-weight:900;text-transform:uppercase;line-height:.84;letter-spacing:-.005em}
+.it{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--gold-hi)}
+.label{font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+h2{font-family:var(--tall);font-weight:900;text-transform:uppercase;font-size:clamp(56px,9vw,132px);line-height:.86;text-wrap:balance}
+h2 .it{text-transform:none;font-size:.62em;letter-spacing:0;display:block;line-height:1.05;margin-top:.1em}
+h3{font-family:var(--tall);font-weight:800;text-transform:uppercase;letter-spacing:.01em;line-height:.95}
+.lede{max-width:54ch;color:var(--muted);font-size:18.5px}
+section{padding:clamp(90px,11vw,150px) 0;position:relative}
+.head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:end;margin-bottom:64px}
+.head .label{display:block;margin-bottom:20px}
+@media (max-width:860px){.head{grid-template-columns:1fr}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:12px;padding:17px 30px;font-family:var(--body);font-size:13px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .12s ease-out,background-color .12s,color .12s}
+.btn:hover{transform:translateY(-2px)}
+.btn-ivory{background:var(--ivory);color:var(--bg)}
+.btn-ivory:hover{background:var(--gold-hi)}
+.btn-line{border:1px solid var(--ivory);color:var(--ivory)}
+.btn-line:hover{background:var(--ivory);color:var(--bg)}
+.btn .arr{transition:transform .12s}
+.btn:hover .arr{transform:translateX(4px)}
+
+/* nav */
+nav{position:fixed;top:var(--frame);left:var(--frame);right:var(--frame);z-index:60;transition:background-color .2s}
+nav.solid{background:rgba(14,13,11,.94);border-bottom:1px solid var(--line)}
+nav .in{display:flex;align-items:center;justify-content:space-between;height:78px;gap:24px}
+.logo{display:grid;grid-template-columns:repeat(2,22px);grid-template-rows:repeat(2,22px);border:1px solid var(--ivory);text-decoration:none;font-family:var(--tall);font-weight:800;font-size:13px}
+.logo span{display:grid;place-items:center;border:1px solid rgba(242,235,220,.35)}
+.logo span:nth-child(4){background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.links{display:flex;gap:34px;list-style:none}
+.links a{text-decoration:none;font-size:12.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);transition:color .12s}
+.links a:hover{color:var(--ivory)}
+@media (max-width:960px){.links{display:none}}
+
+/* hero */
+.hero{padding:120px 0 0;overflow:hidden}
+.hero .name{font-size:clamp(64px,15vw,250px);text-align:center;white-space:nowrap;display:flex;justify-content:center;overflow:hidden}
+.hero .name span{display:inline-block;animation:up .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes up{from{transform:translateY(100%)}}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}}
+.hero-sub{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center;margin-top:18px;padding-top:18px;border-top:1px solid var(--line);animation:fade .8s .5s both}
+.hero-sub .label{color:var(--muted)}
+.hero-sub p{text-align:center;font-family:var(--serif);font-style:italic;font-size:clamp(24px,3vw,40px);line-height:1.1}
+@media (max-width:760px){.hero-sub{grid-template-columns:1fr;text-align:center}}
+.building{text-align:center;margin-top:28px;color:var(--muted);font-size:clamp(17px,1.8vw,21px);animation:fade .8s .7s both}
+#typed{color:var(--ivory);border-bottom:1px solid var(--gold);padding:0 3px}
+#typed::after{content:"";display:inline-block;width:1px;height:.95em;background:var(--gold-hi);margin-left:3px;vertical-align:-.1em;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero .cta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:34px;animation:fade .8s .85s both}
+
+/* showcase */
+.show{position:relative;height:clamp(200px,31vw,440px);margin-top:70px;perspective:1600px;animation:fade 1s .9s both}
+.shot{position:absolute;background:#000;border:1px solid var(--line);box-shadow:0 50px 100px -40px rgba(0,0,0,.9);overflow:hidden;will-change:transform}
+.shot .bar{height:clamp(16px,1.8vw,26px);display:flex;align-items:center;gap:5px;padding:0 10px;background:#1b1914;border-bottom:1px solid var(--line)}
+.shot .bar i{width:7px;height:7px;border-radius:50%;background:#3a362d}
+.shot img{width:100%;height:auto;aspect-ratio:16/10}
+.s-mid{left:50%;width:min(52%,620px);top:0;z-index:3;transform:translateX(-50%)}
+.s-l{left:3%;width:min(38%,460px);top:14%;z-index:2;transform:rotateY(14deg) rotateZ(-2deg)}
+.s-r{right:3%;width:min(38%,460px);top:14%;z-index:2;transform:rotateY(-14deg) rotateZ(2deg)}
+.show-cap{position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);z-index:4;white-space:nowrap}
+
+/* ribbon */
+.ribbon{border-block:1px solid var(--line);overflow:hidden;padding:22px 0;margin-top:clamp(70px,8vw,110px)}
+.ribbon .row{display:flex;width:max-content;animation:slide 45s linear infinite;will-change:transform}
+.ribbon span{font-family:var(--tall);font-weight:800;text-transform:uppercase;font-size:clamp(34px,4.6vw,64px);line-height:1;white-space:nowrap;display:flex;align-items:center}
+.ribbon span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--ivory)}
+.ribbon span::after{content:"✦";font-size:.4em;color:var(--gold);margin:0 32px;-webkit-text-stroke:0}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ivory)}
+.svc article{padding:40px 34px 44px 0;display:flex;flex-direction:column;gap:18px;transition:background-color .15s}
+.svc article+article{padding-left:34px;border-left:1px solid var(--line)}
+.svc .n{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--gold)}
+.svc h3{font-size:clamp(40px,4vw,58px)}
+.svc h3 .it{display:block;text-transform:none;font-size:.62em;letter-spacing:0;font-weight:500;margin-top:6px}
+.svc p{color:var(--muted)}
+.svc ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
+.svc li{font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border:1px solid var(--line)}
+@media (max-width:960px){.svc{grid-template-columns:1fr}.svc article,.svc article+article{padding:36px 0;border-left:0;border-bottom:1px solid var(--line)}}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:70px;border-block:1px solid var(--line)}
+.facts div{padding:30px 20px;text-align:center}
+.facts div+div{border-left:1px solid var(--line)}
+.facts strong{display:block;font-family:var(--tall);font-weight:900;font-size:clamp(46px,5vw,72px);line-height:1;text-transform:uppercase}
+.facts span{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:700px){.facts{grid-template-columns:1fr}.facts div+div{border-left:0;border-top:1px solid var(--line)}}
+
+/* work */
+.work{background:var(--panel)}
+.proj{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(30px,5vw,72px);align-items:center;padding:56px 0;border-top:1px solid var(--line)}
+.proj:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1.35fr)}
+.proj:nth-child(even) .pic{order:2}
+.pic{display:block;text-decoration:none;position:relative;overflow:hidden;border:1px solid var(--line);background:#000}
+.pic .bar{height:28px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#1b1914;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted);letter-spacing:.06em}
+.pic .bar i{width:8px;height:8px;border-radius:50%;background:#3a362d}
+.pic .bar em{margin-left:10px;font-style:normal}
+.pic .vp{overflow:hidden;aspect-ratio:16/10}
+.pic img{width:100%;height:100%;object-fit:contain;transition:transform .5s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.pic:hover{border-color:var(--gold)}
+.pic .view{position:absolute;right:16px;bottom:16px;background:var(--ivory);color:var(--bg);font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:12px 18px;transform:translateY(8px);opacity:0;transition:transform .15s,opacity .15s}
+.pic:hover .view{transform:none;opacity:1}
+.proj .num{font-family:var(--serif);font-style:italic;font-size:24px;color:var(--gold)}
+.proj h3{font-size:clamp(46px,5.4vw,84px);overflow-wrap:anywhere;line-height:.86;margin:10px 0 18px}
+.proj p{color:var(--muted);max-width:44ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 26px}
+.tags span{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;border:1px solid var(--line)}
+@media (max-width:900px){.proj,.proj:nth-child(even){grid-template-columns:1fr}.proj:nth-child(even) .pic{order:0}}
+.dash{aspect-ratio:16/10;display:grid;grid-template-columns:28% 1fr;background:#12110e}
+.dash .sb{border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:8px}
+.dash .sb b{height:10px;background:#2a2720}
+.dash .sb b:first-child{background:var(--gold);width:60%;margin-bottom:10px}
+.dash .mn{padding:18px;display:flex;flex-direction:column;gap:12px}
+.dash .t{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dash .t div{border:1px solid var(--line);padding:10px;font-family:var(--tall);font-weight:800;font-size:clamp(16px,2vw,26px)}
+.dash .t small{display:block;font-family:var(--body);font-weight:400;font-size:9px;letter-spacing:.18em;color:var(--muted)}
+.dash .ch{flex:1;border:1px solid var(--line);position:relative}
+.dash .ch svg{position:absolute;inset:0;width:100%;height:100%}
+.dash .lock{position:absolute;inset:0;display:grid;place-items:center;background:rgba(14,13,11,.35)}
+.dash .lock span{background:var(--ivory);color:var(--bg);font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;padding:12px 18px}
+
+/* builder */
+.builder-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:60px;align-items:center}
+@media (max-width:1000px){.builder-grid{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.chip{font:inherit;font-size:13px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;padding:11px 16px;border:1px solid var(--line);background:transparent;color:var(--ivory);cursor:pointer;transition:transform .1s ease-out,background-color .1s,border-color .1s,color .1s}
+.chip:hover{border-color:var(--ivory);transform:translateY(-2px)}
+.chip[aria-pressed="true"]{background:var(--ivory);color:var(--bg);border-color:var(--ivory);font-weight:500}
+.hint{margin-top:16px;color:var(--muted);font-size:14px}
+.app{border:1px solid var(--line);background:#12110e;box-shadow:0 40px 100px -40px rgba(0,0,0,.9)}
+.app-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.app-bar i{width:9px;height:9px;border-radius:50%;background:#3a362d}
+.app-bar .url{margin-left:12px;flex:1;font-size:12px;color:var(--muted)}
+.app-bar .ex{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.app-body{display:grid;grid-template-columns:196px minmax(0,1fr);min-height:380px}
+.side{padding:18px 12px;display:flex;flex-direction:column;gap:3px;border-right:1px solid var(--line)}
+.side .brand{font-family:var(--tall);font-weight:800;font-size:18px;text-transform:uppercase;padding:2px 10px 14px}
+.mod{display:flex;align-items:center;gap:10px;padding:9px 10px;font-size:13.5px;color:var(--muted);animation:modIn .2s ease-out both}
+.mod:nth-child(2){color:var(--ivory);background:rgba(242,235,220,.07);box-shadow:inset 2px 0 0 var(--gold)}
+.mod b{width:24px;height:24px;border:1px solid var(--line);color:var(--gold-hi);display:grid;place-items:center;font-family:var(--tall);font-size:11px;font-weight:800;flex:none}
+@keyframes modIn{from{transform:translateX(-8px);opacity:0}}
+.main{padding:22px;display:flex;flex-direction:column;gap:16px}
+.main h4{font-family:var(--tall);font-weight:800;text-transform:uppercase;font-size:30px;line-height:1}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tile{border:1px solid var(--line);padding:14px}
+.tile small{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.tile strong{font-family:var(--tall);font-weight:800;font-size:28px;font-variant-numeric:tabular-nums}
+.rows{border:1px solid var(--line)}
+.rows div{display:flex;justify-content:space-between;gap:12px;padding:11px 14px;font-size:13.5px;border-bottom:1px solid var(--line);animation:fade .2s ease-out both}
+.rows div:last-child{border-bottom:0}
+.pill{font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--gold);color:var(--gold-hi)}
+.pill.w{border-color:#5d574a;color:var(--muted)}
+@media (max-width:600px){.app-body{grid-template-columns:1fr}.side{flex-direction:row;flex-wrap:wrap}.side .brand{width:100%}.tiles{grid-template-columns:1fr 1fr}}
+
+/* security */
+.security{background:var(--panel)}
+.vault-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:60px;align-items:center}
+@media (max-width:1000px){.vault-grid{grid-template-columns:1fr}}
+.rings{position:relative;aspect-ratio:1;max-width:480px;width:100%;margin:0 auto}
+.ring{position:absolute;border-radius:50%;border:1px solid var(--line);will-change:transform}
+.ring::before{content:"";position:absolute;top:-4px;left:calc(50% - 4px);width:8px;height:8px;background:var(--gold-hi);transform:rotate(45deg)}
+.ring:nth-of-type(1){inset:0;animation:turn 26s linear infinite}
+.ring:nth-of-type(2){inset:12%;border-style:dashed;animation:turn 20s linear infinite reverse}
+.ring:nth-of-type(3){inset:24%;animation:turn 15s linear infinite}
+.ring:nth-of-type(4){inset:36%;border-color:var(--gold);animation:turn 11s linear infinite reverse}
+@keyframes turn{to{transform:rotate(360deg)}}
+.lbl{position:absolute;transform:translate(-50%,-50%);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ivory);background:var(--panel);border:1px solid var(--line);padding:5px 11px;white-space:nowrap}
+.core{position:absolute;inset:41%;border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--tall);font-weight:900;font-size:clamp(16px,1.8vw,22px);line-height:.95;text-transform:uppercase;color:var(--bg);background:radial-gradient(circle at 35% 30%,#fff3c4,var(--gold) 60%,#8a6a24)}
+.log{border:1px solid var(--line);background:#0b0a08;padding:18px 22px;font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.95;height:250px;overflow:hidden;margin-top:14px}
+.log .t{color:#5d574a}
+.log .k{color:var(--gold-hi)}
+.log div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;animation:fade .2s ease-out both}
+.measures{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:70px;border-top:1px solid var(--ivory)}
+.measures div{padding:30px 28px 34px 0;border-bottom:1px solid var(--line)}
+.measures div:not(:nth-child(3n+1)){padding-left:28px;border-left:1px solid var(--line)}
+.measures h3{font-size:30px;margin-bottom:10px}
+.measures p{color:var(--muted);font-size:15.5px}
+@media (max-width:900px){.measures{grid-template-columns:1fr}.measures div,.measures div:not(:nth-child(3n+1)){padding:28px 0;border-left:0}}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--ivory)}
+.steps div{padding:36px 30px 0 0}
+.steps div+div{padding-left:30px;border-left:1px solid var(--line)}
+.steps .n{font-family:var(--tall);font-weight:900;font-size:110px;line-height:.8;color:transparent;-webkit-text-stroke:1px var(--gold)}
+.steps h3{font-size:38px;margin:18px 0 10px}
+.steps p{color:var(--muted)}
+@media (max-width:860px){.steps{grid-template-columns:1fr}.steps div,.steps div+div{padding:30px 0;border-left:0}}
+
+/* packages */
+.packages{background:var(--panel)}
+.packs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.pack{border:1px solid var(--line);padding:40px 32px;display:flex;flex-direction:column;gap:18px;transition:transform .12s,border-color .12s}
+.pack:hover{transform:translateY(-5px);border-color:var(--ivory)}
+.pack.lead{background:var(--ivory);color:var(--bg);border-color:var(--ivory)}
+.pack.lead ul,.pack.lead .from{color:#5d574a}
+.pack h3{font-size:36px}
+.price{font-family:var(--tall);font-weight:900;font-size:80px;line-height:.9;font-variant-numeric:tabular-nums}
+.from{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
+.pack ul{list-style:none;display:flex;flex-direction:column;gap:9px;color:var(--muted);font-size:15px;border-top:1px solid currentColor;padding-top:20px}
+.pack li::before{content:"✦  ";color:var(--gold);font-size:11px}
+.note{margin-top:28px;color:var(--muted);font-size:14.5px}
+@media (max-width:960px){.packs{grid-template-columns:1fr}}
+
+/* contact */
+.contact{text-align:center;overflow:hidden}
+.contact .big{font-size:clamp(90px,21vw,330px);white-space:nowrap}
+.contact .it{font-size:clamp(28px,3.6vw,48px);display:block;margin-top:10px}
+.contact .cta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:44px}
+.details{margin-top:40px;display:flex;justify-content:center;flex-wrap:wrap;gap:12px 44px;color:var(--muted);font-size:15px;letter-spacing:.04em}
+footer{border-top:1px solid var(--line);color:var(--muted);padding:30px 0 40px;font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* reveal: always visible, slides only */
+.js .rv{transform:translateY(36px);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.js .rv.in{transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .rv{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="frame-edge" aria-hidden="true"></div>
+
+<nav id="nav" aria-label="Main">
+  <div class="wrap in">
+    <a class="logo" href="#top" aria-label="NC Graphics home"><span>N</span><span>C</span><span>G</span><span>✦</span></a>
+    <ul class="links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#build">Capabilities</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#packages">Packages</a></li>
+    </ul>
+    <a class="btn btn-ivory" href="https://wa.me/447586259995">Contact <span class="arr">→</span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <h1 class="name tall"><span>NC&nbsp;Graphics</span></h1>
+    <div class="hero-sub">
+      <span class="label">Design &amp; Digital</span>
+      <p>If you can describe it, <span class="it">we can build it.</span></p>
+      <span class="label">London, UK</span>
+    </div>
+    <p class="building">Now building <span id="typed">a finance system for a school</span></p>
+    <div class="cta">
+      <a class="btn btn-ivory" href="#work">View our work <span class="arr">→</span></a>
+      <a class="btn btn-line" href="https://wa.me/447586259995">Discuss your idea</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="show" id="show" aria-hidden="true">
+      <div class="shot s-l" data-d="-1"><div class="bar"><i></i><i></i><i></i></div><img width="800" height="500" src="img/goldclean.png" alt=""></div>
+      <div class="shot s-r" data-d="1"><div class="bar"><i></i><i></i><i></i></div><img width="800" height="500" src="img/nachmancohen.png" alt=""></div>
+      <div class="shot s-mid" data-d="0"><div class="bar"><i></i><i></i><i></i></div><img width="800" height="500" src="img/yoelispost.png" alt=""></div>
+    </div>
+  </div>
+  <div class="ribbon" aria-hidden="true">
+    <div class="row">
+      <span>Websites</span><span>Online orders</span><span>Booking systems</span><span>Finance dashboards</span><span>Donor management</span><span>Tuition &amp; payments</span><span>Branding</span><span>Prospectuses</span>
+      <span>Websites</span><span>Online orders</span><span>Booking systems</span><span>Finance dashboards</span><span>Donor management</span><span>Tuition &amp; payments</span><span>Branding</span><span>Prospectuses</span>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="label">Our services</span><h2>Three crafts. <span class="it">One studio.</span></h2></div>
+      <p class="lede">A website brings the enquiries in, a system handles them, and design makes both feel like you.</p>
+    </div>
+    <div class="svc">
+      <article class="rv"><span class="n">i.</span><h3>Websites <span class="it">that bring work in</span></h3><p>Fast, mobile-first sites that explain what you do and turn visitors into enquiries, orders and bookings.</p><ul><li>Business sites</li><li>Landing pages</li><li>Online ordering</li><li>SEO</li></ul></article>
+      <article class="rv"><span class="n">ii.</span><h3>Systems <span class="it">that run the day</span></h3><p>Custom software built around how your organisation already works, replacing spreadsheets and old databases.</p><ul><li>Dashboards</li><li>Finance</li><li>Bookings</li><li>Reports &amp; PDFs</li></ul></article>
+      <article class="rv"><span class="n">iii.</span><h3>Design <span class="it">that gets noticed</span></h3><p>Brand identity, print and digital graphics, from a logo to a full fundraising prospectus.</p><ul><li>Branding</li><li>Prospectuses</li><li>Social graphics</li><li>Direction</li></ul></article>
+    </div>
+    <div class="facts rv">
+      <div><strong>Bespoke</strong><span>Built for you, no templates</span></div>
+      <div><strong>EN · עב</strong><span>English, Hebrew &amp; right-to-left</span></div>
+      <div><strong>£30</strong><span>Monthly support from</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="label">Selected work</span><h2>The work. <span class="it">Live, and yours to try.</span></h2></div>
+      <p class="lede">Real sites for real businesses. Open them and click around.</p>
+    </div>
+    <div>
+      <article class="proj">
+        <a class="pic rv" href="https://yoelispost.com"><div class="bar"><i></i><i></i><i></i><em>yoelispost.com</em></div><div class="vp"><img width="800" height="500" src="img/yoelispost.png" alt="Yoeli's Post home page"></div><span class="view">Visit site →</span></a>
+        <div class="rv"><span class="num">01</span><h3>Yoeli's Post</h3><p>A delivery and distribution website where customers explore services, check prices and place orders online.</p><div class="tags"><span>Business website</span><span>Online orders</span><span>Pricing</span></div><a class="btn btn-line" href="https://yoelispost.com">Visit live site <span class="arr">→</span></a></div>
+      </article>
+      <article class="proj">
+        <a class="pic rv" href="https://goldclean.uk"><div class="bar"><i></i><i></i><i></i><em>goldclean.uk</em></div><div class="vp"><img width="800" height="500" src="img/goldclean.png" alt="GoldClean home page"></div><span class="view">Visit site →</span></a>
+        <div class="rv"><span class="num">02</span><h3>GoldClean</h3><p>A customer-focused website for a laundry and ironing pickup service, with clear pricing and easy online ordering.</p><div class="tags"><span>Service website</span><span>Bookings</span><span>Customer accounts</span></div><a class="btn btn-line" href="https://goldclean.uk">Visit live site <span class="arr">→</span></a></div>
+      </article>
+      <article class="proj">
+        <a class="pic rv" href="https://nachmancohen.com"><div class="bar"><i></i><i></i><i></i><em>nachmancohen.com</em></div><div class="vp"><img width="800" height="500" src="img/nachmancohen.png" alt="Nachman Cohen home page"></div><span class="view">Visit site →</span></a>
+        <div class="rv"><span class="num">03</span><h3>Nachman Cohen</h3><p>An artist website in Hebrew that brings music, video and contact into one place.</p><div class="tags"><span>Artist website</span><span>Hebrew · RTL</span><span>Media</span></div><a class="btn btn-line" href="https://nachmancohen.com">Visit live site <span class="arr">→</span></a></div>
+      </article>
+      <article class="proj">
+        <a class="pic rv" href="https://wa.me/447586259995"><div class="bar"><i></i><i></i><i></i><em>Private system · login only</em></div>
+          <div class="dash"><div class="sb"><b></b><b></b><b></b><b></b><b></b><b></b></div><div class="mn"><div class="t"><div><small>COLLECTED</small>••••</div><div><small>OUTSTANDING</small>••••</div><div><small>RECORDS</small>••••</div></div><div class="ch"><svg viewBox="0 0 300 120" preserveAspectRatio="none"><path d="M0,95 C40,90 60,60 100,66 S160,100 200,70 S260,22 300,14" fill="none" stroke="#ecd290" stroke-width="1.5"/></svg></div></div></div>
+          <div class="dash lock" style="position:absolute;inset:28px 0 0;aspect-ratio:auto;display:grid;background:rgba(14,13,11,.4)"><span>Private · demo on request</span></div>
+        </a>
+        <div class="rv"><span class="num">04</span><h3>Finance System</h3><p>A private system for an institution: tuition, donations, payments and reports, replacing old databases and spreadsheets.</p><div class="tags"><span>Business system</span><span>Institutions</span><span>Secure login</span></div><a class="btn btn-line" href="https://wa.me/447586259995">Ask for a private demo <span class="arr">→</span></a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="build">
+  <div class="wrap builder-grid">
+    <div class="rv">
+      <span class="label">No fixed menu</span>
+      <h2 style="margin-top:20px">Choose the parts. <span class="it">We build the whole.</span></h2>
+      <p class="lede" style="margin-top:22px">No template to squeeze into. Choose what your organisation needs and see the system take shape. Anything not on this list, we build too.</p>
+      <div class="chips" id="chips" role="group" aria-label="System modules"></div>
+      <p class="hint">Click to add or remove modules.</p>
+    </div>
+    <div class="app rv" aria-live="polite">
+      <div class="app-bar"><i></i><i></i><i></i><div class="url">admin.your-organisation.co.uk</div><span class="ex">Example</span></div>
+      <div class="app-body">
+        <div class="side" id="side"></div>
+        <div class="main">
+          <h4 id="mod-title">Overview</h4>
+          <div class="tiles">
+            <div class="tile"><small>This month</small><strong>£48,320</strong></div>
+            <div class="tile"><small>Outstanding</small><strong>£6,140</strong></div>
+            <div class="tile"><small>Records</small><strong>1,284</strong></div>
+          </div>
+          <div class="rows" id="rows"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="security" id="security">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="label">Secure by design</span><h2>Your data. <span class="it">Guarded at the centre.</span></h2></div>
+      <p class="lede">Our systems handle payments, donations and family records, so security is part of the first sketch, not an extra at the end.</p>
+    </div>
+    <div class="vault-grid">
+      <div class="rings rv" aria-hidden="true">
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <span class="lbl" style="left:50%;top:0">Encrypted connection</span>
+        <span class="lbl" style="left:86%;top:50%">Secure login</span>
+        <span class="lbl" style="left:50%;top:76%">Access permissions</span>
+        <span class="lbl" style="left:22%;top:38%">Backups</span>
+        <div class="core">Your<br>data</div>
+      </div>
+      <div class="rv">
+        <p class="label">System log · example</p>
+        <div class="log" id="log" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="measures">
+      <div class="rv"><h3>Encrypted everywhere</h3><p>Every site and system runs on HTTPS, so data between the browser and the server is encrypted.</p></div>
+      <div class="rv"><h3>Only their part</h3><p>Database-level access rules decide who reads what. A parent sees their own account; the office sees the rest.</p></div>
+      <div class="rv"><h3>Protected logins</h3><p>Passwords are never stored in plain text, and two-step login can be switched on for staff.</p></div>
+      <div class="rv"><h3>Backed up</h3><p>Automatic backups mean a mistake never costs you your records.</p></div>
+      <div class="rv"><h3>GDPR in mind</h3><p>We collect only what you need and keep personal data in a secure, UK/EU-friendly setup.</p></div>
+      <div class="rv"><h3>Private by default</h3><p>Internal systems are never public. No login, no access.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head rv"><div><span class="label">How we work</span><h2>Simple process. <span class="it">Serious detail.</span></h2></div></div>
+    <div class="steps">
+      <div class="rv"><span class="n">01</span><h3>Discover</h3><p>We sit down, listen and map out what you need. You get a clear plan and a fixed quote.</p></div>
+      <div class="rv"><span class="n">02</span><h3>Design &amp; build</h3><p>You see real progress early and often, and every change is made with you.</p></div>
+      <div class="rv"><span class="n">03</span><h3>Launch &amp; support</h3><p>We put it live, train your team and stay on hand with monthly support.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="packages" id="packages">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="label">Packages</span><h2>One vision. <span class="it">Three starting points.</span></h2></div>
+      <p class="lede">Starting prices to help you plan. Every project gets its own fixed quote after our first conversation.</p>
+    </div>
+    <div class="packs">
+      <div class="pack rv"><h3>The Essentials</h3><div><span class="from">From</span><div class="price">£1,590</div></div><ul><li>Up to 5 pages</li><li>Responsive design</li><li>Contact &amp; WhatsApp links</li><li>Domain guidance</li><li>Basic SEO</li></ul></div>
+      <div class="pack lead rv"><h3>Business Presence</h3><div><span class="from">From</span><div class="price">£2,500</div></div><ul><li>Everything in Essentials</li><li>Custom sections</li><li>Booking or enquiry flow</li><li>Business email</li><li>Basic admin</li></ul></div>
+      <div class="pack rv"><h3>Custom Systems</h3><div><span class="from">From</span><div class="price">£4,000</div></div><ul><li>Bespoke website &amp; system</li><li>Orders or bookings workflow</li><li>Management dashboard</li><li>Invoicing &amp; PDFs</li><li>Payment integration</li></ul></div>
+    </div>
+    <p class="note">Ongoing maintenance and support from £30 a month. Hosting, subscriptions and extra features are quoted separately.</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="label">Have an idea?</span>
+    <h2 class="big tall rv" style="margin-top:20px">Let's talk</h2>
+    <span class="it">and make it real.</span>
+    <div class="cta">
+      <a class="btn btn-ivory" href="https://wa.me/447586259995">WhatsApp us <span class="arr">→</span></a>
+      <a class="btn btn-line" href="mailto:ncgraphics2023@gmail.com">Send an email</a>
+      <a class="btn btn-line" href="https://instagram.com/ncgraphics.design">Instagram</a>
+    </div>
+    <div class="details"><span>+44 7586 259995</span><span>ncgraphics2023@gmail.com</span><span>@ncgraphics.design</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>© 2026 NC Graphics · Websites &amp; Graphic Design</span><span>Made with purpose, built for people.</span></div>
+</footer>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=matchMedia('(pointer: fine)').matches;
+  document.documentElement.classList.add('js');
+
+  /* fit the giant name to the width */
+  var nm=document.querySelector('.hero .name'),ns=nm.querySelector('span');
+  function fit(){nm.style.fontSize='';var w=nm.clientWidth,sw=ns.scrollWidth;if(sw>w){nm.style.fontSize=(parseFloat(getComputedStyle(nm).fontSize)*w/sw*0.98)+'px';}}
+  fit();addEventListener('resize',fit);if(document.fonts)document.fonts.ready.then(fit);
+
+  /* reveal */
+  var rv=[].slice.call(document.querySelectorAll('.rv'));
+  if('IntersectionObserver' in window&&!reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
+    rv.forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)el.classList.add('in');else io.observe(el);});
+  } else rv.forEach(function(el){el.classList.add('in');});
+
+  /* nav + image parallax: one rAF per scroll frame */
+  var nav=document.getElementById('nav'),px=[].slice.call(document.querySelectorAll('.px')),ticking=false;
+  function onScroll(){ticking=false;nav.classList.toggle('solid',scrollY>40);
+    if(reduce)return;
+    for(var i=0;i<px.length;i++){var r=px[i].parentNode.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)continue;var k=(r.top+r.height/2-innerHeight/2)/innerHeight;px[i].style.transform='translateY('+(-6+k*-6)+'%)';}}
+  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll);}},{passive:true});
+  onScroll();
+
+  /* hero showcase follows the mouse instantly */
+  var show=document.getElementById('show'),shots=[].slice.call(show.querySelectorAll('.shot')),base=[];
+  shots.forEach(function(s){base.push(getComputedStyle(s).transform==='none'?'':getComputedStyle(s).transform);});
+  if(fine&&!reduce){
+    var mx=0,my=0,raf=0;
+    addEventListener('mousemove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;if(raf)return;raf=requestAnimationFrame(function(){raf=0;
+      shots.forEach(function(s,i){var d=+s.dataset.d,depth=d===0?14:24;s.style.transform=(base[i]?base[i]+' ':'')+'translate('+(mx*depth)+'px,'+(my*depth)+'px) rotateY('+(mx*6)+'deg) rotateX('+(-my*6)+'deg)';});});},{passive:true});
+  }
+
+  /* typed line */
+  var phrases=["a finance system for a school","an online ordering site","a booking system","a donor dashboard","a website in English & Hebrew","a fundraising prospectus","whatever you need next"];
+  var el=document.getElementById('typed');
+  if(!reduce){var p=0,i=phrases[0].length,del=true;
+    setTimeout(function step(){var cur=phrases[p];
+      if(del){i--;el.textContent=cur.slice(0,i);if(i<=0){del=false;p=(p+1)%phrases.length;}setTimeout(step,20);}
+      else{var nx=phrases[p];i++;el.textContent=nx.slice(0,i);if(i>=nx.length){del=true;setTimeout(step,1900);}else setTimeout(step,42);}
+    },2200);}
+
+  /* module builder (example data) */
+  var mods=[
+    {k:'TF',n:'Tuition & fees',rows:[['Family A · Term 2','£1,200','Paid'],['Family B · Term 2','£950','Due']]},
+    {k:'DO',n:'Donors',rows:[['Annual dinner pledges','£18,400','Paid'],['Monthly standing orders','£3,260','Paid']]},
+    {k:'PR',n:'Payroll',rows:[['Teaching staff · Nov','£22,150','Paid'],['Office staff · Nov','£4,800','Due']]},
+    {k:'BK',n:'Bookings',rows:[['Hall booking · Sunday','14:00','Paid'],['Collection slot · Tuesday','09:30','Due']]},
+    {k:'OR',n:'Online orders',rows:[['Order #2041 · 3 items','£46.00','Paid'],['Order #2042 · 1 item','£12.50','Due']]},
+    {k:'IN',n:'PDF invoices',rows:[['INV-0318 sent by email','£480','Paid'],['INV-0319 draft','£1,150','Due']]},
+    {k:'RE',n:'Reports',rows:[['Cash flow · October','+£9,820','Paid'],['Arrears report','14 families','Due']]},
+    {k:'HC',n:'Hebrew calendar',rows:[['ט"ו כסלו · Fee run','Scheduled','Paid'],['ר"ח טבת · Reminder','Scheduled','Due']]},
+    {k:'AL',n:'WhatsApp & email alerts',rows:[['Payment reminders','86 sent','Paid'],['Receipts','212 sent','Paid']]}
+  ];
+  var on=[true,true,false,false,false,true,false,false,false];
+  var chips=document.getElementById('chips'),side=document.getElementById('side'),rows=document.getElementById('rows'),title=document.getElementById('mod-title');
+  mods.forEach(function(m,ix){var b=document.createElement('button');b.type='button';b.className='chip';b.id='chip-'+ix;b.textContent=m.n;b.setAttribute('aria-pressed',on[ix]);
+    b.onclick=function(){if(on[ix]&&on.filter(Boolean).length===1)return;on[ix]=!on[ix];b.setAttribute('aria-pressed',on[ix]);render(ix);};chips.appendChild(b);});
+  function render(focus){
+    var act=[];mods.forEach(function(m,ix){if(on[ix])act.push(ix);});
+    var show=(focus!=null&&on[focus])?focus:act[0];
+    act.sort(function(a,b){return a===show?-1:b===show?1:a-b;});
+    side.innerHTML='<div class="brand">Your System</div>'+act.map(function(ix,n){return '<div class="mod" style="animation-delay:'+(n*25)+'ms"><b>'+mods[ix].k+'</b>'+mods[ix].n+'</div>';}).join('');
+    title.textContent=mods[show].n;
+    rows.innerHTML=mods[show].rows.map(function(r){return '<div><span>'+r[0]+'</span><span style="display:flex;gap:10px;align-items:center"><strong style="font-weight:500;font-variant-numeric:tabular-nums">'+r[1]+'</strong><span class="pill'+(r[2]==='Due'?' w':'')+'">'+r[2]+'</span></span></div>';}).join('');
+  }
+  render(null);
+
+  /* security log (example) */
+  var lines=['TLS connection established','Staff login verified · 2-step code accepted','Access rule: parent can view own account only','Payment record saved','Backup completed','Blocked request without valid session','Receipt PDF generated and emailed','Admin role checked before report export'];
+  var log=document.getElementById('log'),li=0;
+  function stamp(){var d=new Date();return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)+':'+('0'+d.getSeconds()).slice(-2);}
+  function add(){var d=document.createElement('div');d.innerHTML='<span class="t">'+stamp()+'</span> <span class="k">✦</span> '+lines[li%lines.length];li++;log.appendChild(d);while(log.children.length>8)log.removeChild(log.firstChild);}
+  for(var z=0;z<7;z++)add();
+  if(!reduce)setInterval(add,1800);
+})();
+</script>
+</body>
+</html>
