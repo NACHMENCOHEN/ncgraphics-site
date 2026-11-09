@@ -359,7 +359,7 @@ html.lenis,html.lenis body{height:auto}
 
 
 /* ===== royal polish ===== */
-h2 .it,h2 .it .wd,.svc h3 .it,.hero-sub .it,.zoom-say em{background:linear-gradient(100deg,#9b7428 0%,var(--gold) 25%,#fff0c4 48%,var(--gold-hi) 60%,var(--gold) 80%,#9b7428 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:foil 7s linear infinite}
+h2 .it,h2 .it .wd,.svc h3 .it,.hero-sub .it,.zoom-say em{background:linear-gradient(100deg,var(--gold-hi) 0%,#e2bf6c 25%,#fff3cf 48%,var(--gold-hi) 62%,#e2bf6c 82%,var(--gold-hi) 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:foil 7s linear infinite}
 .zoom-say em{background:none;color:#14110a;animation:none}
 @keyframes foil{from{background-position:110% 0}to{background-position:-110% 0}}
 h2{letter-spacing:-.015em;line-height:.92}
@@ -834,6 +834,7 @@ section .wrap{text-shadow:0 1px 18px rgba(14,13,11,.9)}
     var root=document.documentElement,n=document.getElementById('preN'),bar=document.getElementById('preBar'),pre=document.getElementById('pre');
     if(reduce){root.classList.add('ready');return;}
     var t0=performance.now(),loaded=false,done=false;
+    setTimeout(function(){if(!done){done=true;root.classList.add('ready');startGL();setTimeout(function(){pre.style.display='none';},1300);}},4200);
     (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){loaded=true;});
     setTimeout(function(){loaded=true;},2200);
     (function tick(){var el=performance.now()-t0,k=Math.min(1,el/1400);if(!loaded)k=Math.min(k,.9);var v=Math.round((1-Math.pow(1-k,3))*100);n.textContent=v;bar.style.width=v+'%';
