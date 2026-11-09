@@ -342,6 +342,18 @@ header,section,footer,.bigtype-wrap{position:relative;z-index:1}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 
+
+/* ===== 3D gold coin ===== */
+.coin-wrap{position:relative;width:clamp(230px,27vw,380px);aspect-ratio:1;margin:6px auto 34px;display:none;cursor:grab;touch-action:pan-y}
+.gl .coin-wrap{display:block}
+.coin-wrap:active{cursor:grabbing}
+#coin{position:relative;z-index:2;width:100%;height:100%;display:block}
+.coin-halo{position:absolute;inset:-30%;border-radius:50%;background:radial-gradient(circle,rgba(236,210,144,.28),rgba(201,162,74,.08) 40%,transparent 68%);animation:halo 5s ease-in-out infinite}
+@keyframes halo{50%{transform:scale(1.08);opacity:.75}}
+.coin-shadow{position:absolute;left:18%;right:18%;bottom:-6%;height:9%;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.75),transparent 70%);filter:blur(6px);z-index:1}
+.coin-tip{position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);white-space:nowrap;color:var(--muted);font-size:10.5px;opacity:.7}
+@media (pointer:coarse){.coin-tip{display:none}}
+
 /* reveal: always visible, slides only */
 .js .rv{transform:translateY(36px);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .js .rv.in{transform:none}
@@ -379,6 +391,7 @@ html.lenis,html.lenis body{height:auto}
 <header class="hero" id="top">
   <div class="wrap">
     <h1 class="name tall"><span>NC&nbsp;Graphics</span></h1>
+    <div class="coin-wrap" id="coinWrap" aria-hidden="true"><div class="coin-halo"></div><canvas id="coin"></canvas><div class="coin-shadow"></div><span class="coin-tip label">Drag to spin</span></div>
     <div class="hero-sub">
       <span class="label">Design &amp; Digital</span>
       <p>If you can describe it, <span class="it">we can build it.</span></p>
@@ -848,6 +861,82 @@ html.lenis,html.lenis body{height:auto}
       (function raf(t){lenis.raf(t);requestAnimationFrame(raf);})(performance.now());
       [].forEach.call(document.querySelectorAll('a[href^="#"]'),function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length<2)return;var t=document.querySelector(id);if(!t)return;e.preventDefault();lenis.scrollTo(t,{offset:-70,duration:1.6});});});
     }catch(e){}
+  })();
+
+  /* ===== the 3D gold coin ===== */
+  (function(){
+    var cv=document.getElementById('coin'),wrap=document.getElementById('coinWrap');
+    if(!cv||typeof THREE==='undefined')return;
+    var R;try{R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});}catch(e){wrap.style.display='none';return;}
+    R.setPixelRatio(Math.min(devicePixelRatio||1,2));
+    R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.15;
+    var scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(28,1,.1,50);cam.position.set(0,0,5.2);
+    function size(){var w=wrap.clientWidth;R.setSize(w,w,false);}size();addEventListener('resize',size);
+
+    /* studio reflections for the metal */
+    var pm=new THREE.PMREMGenerator(R),es=new THREE.Scene(),sg=new THREE.SphereGeometry(10,48,24),cc=[],pa=sg.attributes.position;
+    for(var i=0;i<pa.count;i++){var y=pa.getY(i)/10,t=(y+1)/2;var c=new THREE.Color().setRGB(.04+.9*Math.pow(t,2.2),.035+.72*Math.pow(t,2.4),.03+.42*Math.pow(t,2.8));cc.push(c.r,c.g,c.b);}
+    sg.setAttribute('color',new THREE.Float32BufferAttribute(cc,3));
+    es.add(new THREE.Mesh(sg,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.BackSide})));
+    function panel(x,y,z,w,h,k){var m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:new THREE.Color(k,k*.92,k*.75),side:THREE.DoubleSide}));m.position.set(x,y,z);m.lookAt(0,0,0);es.add(m);}
+    panel(-4,3,4,4,1.2,6);panel(5,1,3,1.2,5,4);panel(0,-4,5,6,.6,2.5);panel(-5,-1,-3,2,4,3);
+    var env=pm.fromScene(es,.03).texture;
+
+    /* coin face artwork drawn in canvas: white = raised metal */
+    function face(back){
+      var S=1024,c=document.createElement('canvas');c.width=c.height=S;var x=c.getContext('2d'),C=S/2;
+      x.fillStyle='#000';x.fillRect(0,0,S,S);x.translate(C,C);x.rotate(-Math.PI/2);
+      x.fillStyle='#fff';x.beginPath();x.arc(0,0,510,0,7);x.arc(0,0,468,0,7,true);x.fill();
+      for(var k=0;k<96;k++){var a=k/96*6.283;x.beginPath();x.arc(Math.cos(a)*446,Math.sin(a)*446,6.5,0,7);x.fill();}
+      x.lineWidth=7;x.strokeStyle='#fff';x.beginPath();x.arc(0,0,336,0,7);x.stroke();
+      var ring=back?'  WEBSITES  ✦  SYSTEMS  ✦  DESIGN  ✦  LONDON  ✦':'  NC GRAPHICS  ✦  DESIGN & DIGITAL  ✦  NC GRAPHICS  ✦  DESIGN & DIGITAL  ✦';
+      x.font='600 40px Jost, Arial, sans-serif';x.textAlign='center';x.textBaseline='middle';
+      var tot=0,ws=[];for(k=0;k<ring.length;k++){var w=x.measureText(ring[k]).width+5;ws.push(w);tot+=w;}
+      var ang=-Math.PI/2-(tot/2)/392;for(k=0;k<ring.length;k++){var a2=ang+ws[k]/2/392;x.save();x.rotate(a2+Math.PI/2);x.fillText(ring[k],0,-392);x.restore();ang+=ws[k]/392;}
+      if(!back){
+        x.font='900 400px "Big Shoulders Display", Oswald, "Arial Narrow", Arial, sans-serif';x.fillText('NC',0,-18);
+        x.font='600 38px Jost, Arial, sans-serif';x.fillText('✦   ✦   ✦',0,214);
+      }else{
+        x.font='400 300px Georgia, serif';x.fillText('✦',0,-30);
+        x.font='600 46px Jost, Arial, sans-serif';x.fillText('IF YOU CAN DESCRIBE IT',0,150);x.fillText('WE CAN BUILD IT',0,206);
+      }
+      return c;
+    }
+    function derive(src,lo,hi,blur){var c=document.createElement('canvas');c.width=c.height=src.width;var x=c.getContext('2d');x.filter='blur('+blur+'px)';x.drawImage(src,0,0);x.filter='none';
+      var d=x.getImageData(0,0,c.width,c.height),a=d.data;for(var i=0;i<a.length;i+=4){var v=a[i]/255,o=lo+(hi-lo)*v;a[i]=a[i+1]=a[i+2]=o*255;}x.putImageData(d,0,0);var t=new THREE.CanvasTexture(c);t.anisotropy=8;return t;}
+    function mats(back){var f=face(back);var bump=derive(f,0,1,2.2);
+      return new THREE.MeshStandardMaterial({color:new THREE.Color(1,.78,.36),metalness:1,roughness:1,envMap:env,envMapIntensity:1.35,
+        map:derive(f,.62,1,1),bumpMap:bump,bumpScale:.9,roughnessMap:derive(f,.52,.16,1.5)});}
+    var reed=document.createElement('canvas');reed.width=2048;reed.height=8;var rx=reed.getContext('2d');for(i=0;i<2048;i+=8){rx.fillStyle='#fff';rx.fillRect(i,0,4,8);rx.fillStyle='#555';rx.fillRect(i+4,0,4,8);}
+    var side=new THREE.MeshStandardMaterial({color:new THREE.Color(.95,.72,.32),metalness:1,roughness:.32,envMap:env,envMapIntensity:1.2,bumpMap:new THREE.CanvasTexture(reed),bumpScale:.6});
+
+    var coin=new THREE.Group();scene.add(coin);var mesh;
+    function build(){if(mesh){coin.remove(mesh);}
+      var g=new THREE.CylinderGeometry(1,1,.13,160,1);mesh=new THREE.Mesh(g,[side,mats(false),mats(true)]);mesh.rotation.x=Math.PI/2;coin.add(mesh);}
+    build();if(document.fonts)document.fonts.ready.then(build);
+
+    var key=new THREE.DirectionalLight(0xfff1d0,2.2);key.position.set(2,2,4);scene.add(key);
+    scene.add(new THREE.AmbientLight(0xffe2a8,.25));
+
+    var mx=0,my=0,spin=0,vel=reduce?0:22,drag=false,lx=0,rotX=0,rotY=0;
+    addEventListener('mousemove',function(e){mx=e.clientX/innerWidth*2-1;my=e.clientY/innerHeight*2-1;},{passive:true});
+    wrap.addEventListener('pointerdown',function(e){drag=true;lx=e.clientX;wrap.setPointerCapture(e.pointerId);});
+    wrap.addEventListener('pointermove',function(e){if(!drag)return;var d=e.clientX-lx;lx=e.clientX;spin+=d*.012;vel=d*.9;});
+    wrap.addEventListener('pointerup',function(){drag=false;});
+    var started=!document.documentElement.classList.contains('js')||document.documentElement.classList.contains('ready');
+    var mo=new MutationObserver(function(){if(document.documentElement.classList.contains('ready')){started=true;vel=reduce?0:24;mo.disconnect();}});mo.observe(document.documentElement,{attributes:true,attributeFilter:['class']});
+    var vis=true;if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting;}).observe(wrap);
+    var last=performance.now();
+    (function loop(now){requestAnimationFrame(loop);var dt=Math.min(.05,(now-last)/1000);last=now;if(!vis||document.hidden)return;
+      var t=now/1000;
+      if(!drag&&started){spin+=vel*dt;vel*=Math.pow(.18,dt);
+        if(Math.abs(vel)<.6){var tgt=Math.round(spin/(Math.PI*2))*Math.PI*2;spin+=(tgt-spin)*Math.min(1,dt*2.5);}}
+      rotY+=((reduce?0:mx*.55)+Math.sin(t*.6)*.12-rotY)*Math.min(1,dt*5);
+      rotX+=((reduce?0:my*.4)+Math.cos(t*.5)*.06-rotX)*Math.min(1,dt*5);
+      coin.rotation.set(rotX,rotY+spin,0);coin.position.y=Math.sin(t*1.1)*.04;
+      key.position.set(Math.cos(t*.7)*3+mx*2,2-my*2,4);
+      R.render(scene,cam);
+    })(last);
   })();
 })();
 </script>
