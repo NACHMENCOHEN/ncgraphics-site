@@ -25,8 +25,11 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--bg)}
-body{background:var(--bg);color:var(--ivory);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{scroll-behavior:smooth;background:var(--bg);overflow-x:clip}
+.security,.rings{overflow:hidden}
+.rings{overflow:visible}
+.vault-grid{overflow:hidden;padding:24px 0}
+body{overflow-x:clip;background:var(--bg);color:var(--ivory);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
 img{max-width:100%;display:block}
 :focus-visible{outline:1px solid var(--gold-hi);outline-offset:4px}
@@ -840,7 +843,7 @@ h2{letter-spacing:-.015em;line-height:.92}
       /* 0: the name, sampled from the real headline */
       var h=document.querySelector('.hero .name'),r=h.getBoundingClientRect(),cs=getComputedStyle(h);
       var oc=document.createElement('canvas'),ow=Math.ceil(W),oh=Math.ceil(r.height+40);oc.width=ow;oc.height=oh;var ox=oc.getContext('2d');
-      ox.fillStyle='#fff';ox.textAlign='center';ox.textBaseline='middle';ox.font='900 '+cs.fontSize+' '+cs.fontFamily;
+      ox.fillStyle='#fff';ox.textAlign='center';ox.textBaseline='middle';ox.font=cs.fontWeight+' '+cs.fontSize+' '+cs.fontFamily;
       ox.fillText(h.textContent.replace(/ /g,' ').toUpperCase(),r.left+r.width/2,oh/2);
       var data=ox.getImageData(0,0,ow,oh).data,hits=[],step=mobile?2:2;
       for(var y=0;y<oh;y+=step)for(var x=0;x<ow;x+=step){if(data[(y*ow+x)*4+3]>140)hits.push(x,y);}
