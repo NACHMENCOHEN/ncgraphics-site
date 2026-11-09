@@ -7,7 +7,7 @@
 <meta name="description" content="NC Graphics builds websites, business systems and design. Secure by design. If you can describe it, we can build it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   /* Layout idea: a black gallery inside an ivory frame. Towering condensed capitals, gold italic accents, the work itself shown large. Single dark world by choice. */
@@ -18,7 +18,7 @@
   --gold-hi:#ecd290;
   --muted:#cfc6b2;
   --line:rgba(242,235,220,.14);
-  --tall:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --tall:"Cinzel","Trajan Pro",Georgia,serif;
   --serif:"Cormorant Garamond",Georgia,serif;
   --body:"Jost","Helvetica Neue",Arial,sans-serif;
   --frame:10px;
@@ -62,9 +62,11 @@ section{padding:clamp(90px,11vw,150px) 0;position:relative}
 nav{position:fixed;top:var(--frame);left:var(--frame);right:var(--frame);z-index:60;transition:background-color .2s}
 nav.solid{background:rgba(14,13,11,.94);border-bottom:1px solid var(--line)}
 nav .in{display:flex;align-items:center;justify-content:space-between;height:78px;gap:24px}
-.logo{display:grid;grid-template-columns:repeat(2,22px);grid-template-rows:repeat(2,22px);border:1px solid var(--ivory);text-decoration:none;font-family:var(--tall);font-weight:600;font-size:13px}
-.logo span{display:grid;place-items:center;border:1px solid rgba(242,235,220,.35)}
-.logo span:nth-child(4){background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ivory)}
+.logo i{font-style:normal;color:var(--gold);font-size:15px;transition:transform .4s}
+.logo:hover i{transform:rotate(90deg)}
+.logo b{display:block;font-family:var(--tall);font-weight:700;font-size:19px;letter-spacing:.18em;line-height:1}
+.logo small{display:block;font-family:var(--body);font-size:9.5px;letter-spacing:.4em;color:var(--gold-hi);margin-top:5px}
 .links{display:flex;gap:34px;list-style:none}
 .links a{text-decoration:none;font-size:12.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);transition:color .12s}
 .links a:hover{color:var(--ivory)}
@@ -448,6 +450,33 @@ section .wrap{text-shadow:0 1px 18px rgba(14,13,11,.9)}
   .log{font-size:12.5px}
 }
 
+
+/* ===== Cinzel tuning ===== */
+.tall,h2,h3,.price,.hero .name{font-family:var(--tall)}
+h2{font-size:clamp(42px,6.6vw,100px);letter-spacing:.01em;line-height:1}
+h2 .it{font-size:.58em;letter-spacing:0;margin-top:.18em}
+.svc h3{font-size:clamp(32px,3vw,44px);letter-spacing:.02em}
+.svc h3 .it{font-size:.6em;margin-top:8px}
+.hs-track .proj h3,.proj h3{font-size:clamp(40px,4.4vw,74px);line-height:1}
+.steps h3{font-size:32px}.pack h3{font-size:28px}.measures h3{font-size:24px}
+.price{font-size:64px;letter-spacing:0}
+.facts strong{font-size:clamp(34px,3.6vw,54px)}
+.contact .big{letter-spacing:.02em}
+.proj .num{font-family:var(--body);font-style:normal;font-size:13px;letter-spacing:.3em;color:var(--gold-hi)}
+.bigtype,.band span,.finale .fx{letter-spacing:.02em}
+.mmenu a{font-weight:600;font-size:clamp(34px,9vw,52px)}
+@media (max-width:960px){
+  nav{top:0!important;left:0!important;right:0!important;background:rgba(11,10,8,.97)!important;border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+  .logo b{font-size:16px}.logo small{font-size:8.5px}
+}
+@media (max-width:640px){
+  h2{font-size:clamp(34px,10vw,48px)}
+  .svc h3{font-size:30px}
+  .hs-track .proj h3,.proj h3{font-size:34px}
+  .facts strong{font-size:36px}
+  .zoom-say p{font-size:9.5vw}
+}
+
 /* reveal: always visible, slides only */
 .js .rv{transform:translateY(36px);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .js .rv.in{transform:none}
@@ -469,7 +498,7 @@ section .wrap{text-shadow:0 1px 18px rgba(14,13,11,.9)}
 
 <nav id="nav" aria-label="Main">
   <div class="wrap in">
-    <a class="logo" href="#top" aria-label="NC Graphics home"><span>N</span><span>C</span><span>G</span><span>✦</span></a>
+    <a class="logo" href="#top" aria-label="NC Graphics home"><i>✦</i><span><b>NC GRAPHICS</b><small>DESIGN &amp; DIGITAL</small></span></a>
     <ul class="links">
       <li><a href="#services">Services</a></li>
       <li><a href="#work">Work</a></li>
@@ -482,12 +511,12 @@ section .wrap{text-shadow:0 1px 18px rgba(14,13,11,.9)}
   </div>
 </nav>
 <div class="mmenu" id="mmenu" aria-hidden="true">
-  <a href="#services"><em>i.</em>Services</a>
-  <a href="#work"><em>ii.</em>Work</a>
-  <a href="#build"><em>iii.</em>Capabilities</a>
-  <a href="#security"><em>iv.</em>Security</a>
-  <a href="#packages"><em>v.</em>Packages</a>
-  <a href="https://wa.me/447586259995"><em>vi.</em>Contact</a>
+  <a href="#services">Services</a>
+  <a href="#work">Work</a>
+  <a href="#build">Capabilities</a>
+  <a href="#security">Security</a>
+  <a href="#packages">Packages</a>
+  <a href="https://wa.me/447586259995">Contact</a>
   <div class="mfoot"><span>+44 7586 259995</span><span>ncgraphics2023@gmail.com</span></div>
 </div>
 
@@ -528,9 +557,9 @@ section .wrap{text-shadow:0 1px 18px rgba(14,13,11,.9)}
       <p class="lede">A website brings the enquiries in, a system handles them, and design makes both feel like you.</p>
     </div>
     <div class="svc">
-      <article class="rv"><span class="n">i.</span><h3>Websites <span class="it">that bring work in</span></h3><p>Fast, mobile-first sites that explain what you do and turn visitors into enquiries, orders and bookings.</p><ul><li>Business sites</li><li>Landing pages</li><li>Online ordering</li><li>SEO</li></ul></article>
-      <article class="rv"><span class="n">ii.</span><h3>Systems <span class="it">that run the day</span></h3><p>Custom software built around how your organisation already works, replacing spreadsheets and old databases.</p><ul><li>Dashboards</li><li>Finance</li><li>Bookings</li><li>Reports &amp; PDFs</li></ul></article>
-      <article class="rv"><span class="n">iii.</span><h3>Design <span class="it">that gets noticed</span></h3><p>Brand identity, print and digital graphics, from a logo to a full fundraising prospectus.</p><ul><li>Branding</li><li>Prospectuses</li><li>Social graphics</li><li>Direction</li></ul></article>
+      <article class="rv"><h3>Websites <span class="it">that bring work in</span></h3><p>Fast, mobile-first sites that explain what you do and turn visitors into enquiries, orders and bookings.</p><ul><li>Business sites</li><li>Landing pages</li><li>Online ordering</li><li>SEO</li></ul></article>
+      <article class="rv"><h3>Systems <span class="it">that run the day</span></h3><p>Custom software built around how your organisation already works, replacing spreadsheets and old databases.</p><ul><li>Dashboards</li><li>Finance</li><li>Bookings</li><li>Reports &amp; PDFs</li></ul></article>
+      <article class="rv"><h3>Design <span class="it">that gets noticed</span></h3><p>Brand identity, print and digital graphics, from a logo to a full fundraising prospectus.</p><ul><li>Branding</li><li>Prospectuses</li><li>Social graphics</li><li>Direction</li></ul></article>
     </div>
     <div class="facts rv">
       <div><strong>Bespoke</strong><span>Built for you, no templates</span></div>
@@ -548,7 +577,7 @@ section .wrap{text-shadow:0 1px 18px rgba(14,13,11,.9)}
       <p>If you can describe it,<br><em>we can build it.</em></p>
     </div>
     <svg class="zoom-mask" id="zSvg" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-      <defs><mask id="zm" maskUnits="userSpaceOnUse" x="-5000" y="-5000" width="11000" height="11000"><rect x="-5000" y="-5000" width="11000" height="11000" fill="#fff"/><text id="zText" x="500" y="285" textLength="880" lengthAdjust="spacingAndGlyphs" text-anchor="middle" font-family="Bodoni Moda, Didot, Georgia, serif" font-weight="600" font-size="230" fill="#000">NO LIMITS</text></mask></defs>
+      <defs><mask id="zm" maskUnits="userSpaceOnUse" x="-5000" y="-5000" width="11000" height="11000"><rect x="-5000" y="-5000" width="11000" height="11000" fill="#fff"/><text id="zText" x="500" y="285" textLength="880" lengthAdjust="spacingAndGlyphs" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="230" fill="#000">NO LIMITS</text></mask></defs>
       <rect x="-5000" y="-5000" width="11000" height="11000" fill="#0e0d0b" mask="url(#zm)"/>
     </svg>
     <div class="zoom-hint label" id="zHint">Keep scrolling</div>
@@ -994,7 +1023,7 @@ section .wrap{text-shadow:0 1px 18px rgba(14,13,11,.9)}
       var tot=0,ws=[];for(k=0;k<ring.length;k++){var w=x.measureText(ring[k]).width+5;ws.push(w);tot+=w;}
       var ang=-Math.PI/2-(tot/2)/392;for(k=0;k<ring.length;k++){var a2=ang+ws[k]/2/392;x.save();x.rotate(a2+Math.PI/2);x.fillText(ring[k],0,-392);x.restore();ang+=ws[k]/392;}
       if(!back){
-        x.font='700 330px "Bodoni Moda", Didot, Georgia, serif';x.fillText('NC',0,-10);
+        x.font='700 300px Cinzel, Georgia, serif';x.fillText('NC',0,-6);
         x.font='600 38px Jost, Arial, sans-serif';x.fillText('✦   ✦   ✦',0,214);
       }else{
         x.font='400 300px Georgia, serif';x.fillText('✦',0,-30);
