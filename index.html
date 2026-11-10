@@ -320,7 +320,7 @@ section{background:transparent}
 .btn-line:hover::before{transform:none}
 .btn-gold::before{content:"";position:absolute;top:0;bottom:0;left:-80%;width:50%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .6s}
 .btn-gold:hover::before{left:130%}
-@media (max-width:760px){#sketch{display:none}}
+@media (max-width:760px){#ink{opacity:.11;stroke-width:1.3}#inkGold{opacity:.32}#pen{opacity:.6}}
 @media (prefers-reduced-motion:reduce){#sketch,.stroke{display:none}.js .wd{transform:none}}
 
 @media (prefers-reduced-motion:reduce){
@@ -630,7 +630,7 @@ section{background:transparent}
     function build(){
       var W=document.documentElement.clientWidth,H=document.body.scrollHeight;
       svg.setAttribute('width',W);svg.setAttribute('height',H);svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.style.height=H+'px';
-      var content=Math.min(1180,W),gut=(W-content)/2,ww=Math.max(150,Math.min(230,W*.15));
+      var content=Math.min(1180,W),gut=(W-content)/2,ww=W<760?W*.62:Math.max(150,Math.min(230,W*.15));
       var y=innerHeight*.9,side=1,x=W-ww-24,d='M'+(W-30)+' '+(innerHeight*.55),gd='';
       while(y<H-500){
         var nx=side>0?W-ww-Math.max(18,gut*.25):Math.max(18,gut*.25);
@@ -639,7 +639,7 @@ section{background:transparent}
         // a gold underline flourish under each sketch
         gd+=' M'+(nx-6)+' '+(y+ww*.66+22)+' q'+(ww*.25)+' -10 '+(ww*.5)+' 0 t'+(ww*.55)+' 0';
         d+=' M'+(side>0?nx:nx+ww)+' '+(y+ww*.66);
-        y+=Math.max(900,innerHeight*1.05);side*=-1;
+        y+=W<760?Math.max(760,innerHeight*.95):Math.max(900,innerHeight*1.05);side*=-1;
       }
       ink.setAttribute('d',d);gold.setAttribute('d',gd);
       L=ink.getTotalLength();ink.style.strokeDasharray=L;ink.style.strokeDashoffset=L;
