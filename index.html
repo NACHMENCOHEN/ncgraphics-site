@@ -239,6 +239,14 @@ footer .seal{filter:brightness(1.35)}
 .burger{border-color:rgba(20,35,74,.3)}.burger i{background:#14234a}
 .coin-shadow{background:radial-gradient(ellipse,rgba(20,35,74,.45),transparent 70%)}
 
+
+.device .priv{margin-left:auto;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#e8cf8e;display:flex;align-items:center;gap:6px}
+.device .priv::before{content:"";width:7px;height:7px;border-radius:50%;background:#e8cf8e}
+.stat{display:flex;align-items:center;gap:18px;margin-top:26px;padding:18px 22px;border:1px solid var(--gold);background:var(--panel);max-width:340px}
+.stat strong{font-family:var(--display);font-weight:700;font-size:58px;line-height:1;color:#14234a}
+.stat span{font-size:14px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--gold-hi);line-height:1.45}
+@media (max-width:640px){.device .priv{font-size:9.5px}.device .bar em{display:none}}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
   .js .rv{opacity:1;transform:none}
@@ -385,14 +393,29 @@ footer .seal{filter:brightness(1.35)}
     </article>
 
     <article class="project">
-      <div class="pname rv"><h3>Finance System</h3><span class="label">Private business system</span></div>
-      <a class="device rv" href="https://wa.me/447586259995"><div class="bar"><i></i><i></i><i></i><em>Private system · login only</em></div><div class="privshot"><div><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg><b>Private system</b><span>Demo available on request</span></div></div></a>
+      <div class="pname rv"><h3>Cheder Vizhnitz</h3><span class="label">Private school system</span></div>
+      <div class="device rv"><div class="bar"><i></i><i></i><i></i><em>Cheder management system</em><span class="priv">Private · login only</span></div><img src="img/cheder.png" width="1600" height="1000" alt="Cheder Vizhnitz management dashboard" loading="lazy"></div>
       <div class="pinfo">
-        <div class="rv"><p>A private system for an institution: tuition, donations, payments and reports, replacing old databases and spreadsheets.</p><div class="actions"><a class="btn btn-line" href="https://wa.me/447586259995">Ask for a demo</a></div></div>
-        <ul class="facts rv">
-          <li><svg class="ico" aria-hidden="true"><use href="#i-sys"/></svg><div><b>Type of work</b><span>Custom finance and management system</span></div></li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Access</b><span>Staff login only, never public</span></div></li>
-        </ul>
+        <div class="rv"><p>A Hebrew management system for a cheder: students, tests, attendance, behaviour and reports for parents, all in one place.</p><div class="stat"><strong>15</strong><span>chadarim already<br>use this system</span></div></div>
+        <ul class="facts rv"><li><svg class="ico" aria-hidden="true"><use href="#i-lang"/></svg><div><b>Type of work</b><span>Hebrew right-to-left management system</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-user"/></svg><div><b>In use</b><span>Already used by 15 chadarim</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg><div><b>Access</b><span>Staff login only, never public</span></div></li></ul>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="pname rv"><h3>Beis Medrash</h3><span class="label">Private finance system</span></div>
+      <div class="device rv"><div class="bar"><i></i><i></i><i></i><em>Beis Medrash finance system</em><span class="priv">Private · login only</span></div><img src="img/beismedrash.png" width="1600" height="1000" alt="Beis Medrash finance dashboard" loading="lazy"></div>
+      <div class="pinfo">
+        <div class="rv"><p>A Hebrew finance system for a beis medrash: members and balances, payments, expenses, suppliers, simchas and reports, replacing an old Access database and spreadsheets.</p></div>
+        <ul class="facts rv"><li><svg class="ico" aria-hidden="true"><use href="#i-lang"/></svg><div><b>Type of work</b><span>Hebrew right-to-left finance system</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-sys"/></svg><div><b>Replaces</b><span>Access database and Excel sheets</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg><div><b>Access</b><span>Gabbai and admin login only</span></div></li></ul>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="pname rv"><h3>Institution Finance</h3><span class="label">Private finance system</span></div>
+      <div class="device rv"><div class="bar"><i></i><i></i><i></i><em>School finance system</em><span class="priv">Private · login only</span></div><img src="img/finance.png" width="1600" height="1000" alt="School finance dashboard" loading="lazy"></div>
+      <div class="pinfo">
+        <div class="rv"><p>A private finance system for a school: families, fees, payments split between tuition, transport and refunds, staff, donations and reports.</p></div>
+        <ul class="facts rv"><li><svg class="ico" aria-hidden="true"><use href="#i-sys"/></svg><div><b>Type of work</b><span>Custom finance and management system</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Access</b><span>Administrator login only, never public</span></div></li></ul>
       </div>
     </article>
   </div>
