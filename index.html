@@ -90,7 +90,7 @@ nav .in{display:flex;align-items:center;justify-content:space-between;gap:24px;h
 .hero h1{font-size:clamp(46px,11.2vw,168px);line-height:.95;letter-spacing:.03em;white-space:nowrap;background:linear-gradient(180deg,#fff6d8 0%,var(--gold-hi) 40%,var(--gold) 75%,#9a7629 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .tag{font-family:var(--serif);font-style:italic;font-size:clamp(24px,2.6vw,36px);color:var(--ivory);margin:20px auto 0;max-width:none}
 .hero .tag span{color:var(--gold-hi)}
-.coin-wrap{position:relative;width:clamp(220px,26vw,340px);aspect-ratio:1;margin:clamp(26px,3vw,40px) auto 0;cursor:grab;touch-action:pan-y}
+.coin-wrap{position:relative;width:clamp(220px,26vw,340px);aspect-ratio:1;margin:clamp(26px,3vw,40px) auto 0;cursor:grab;touch-action:none}
 .coin-wrap:active{cursor:grabbing}
 #coin{position:relative;z-index:2;width:100%;height:100%;display:block}
 .coin-shadow{position:absolute;left:20%;right:20%;bottom:-5%;height:8%;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.7),transparent 70%);filter:blur(6px)}
@@ -733,10 +733,10 @@ section{background:transparent}
     var key=new THREE.DirectionalLight(0xfff1d0,2.2);key.position.set(2,2,4);scene.add(key);
     scene.add(new THREE.AmbientLight(0xffe2a8,.25));
 
-    var mx=0,my=0,spin=0,vel=reduce?0:22,drag=false,lx=0,rotX=0,rotY=0;
+    var mx=0,my=0,spin=0,vel=reduce?0:22,spinX=0,velX=0,drag=false,lx=0,ly=0,rotX=0,rotY=0;
     addEventListener('mousemove',function(e){mx=e.clientX/innerWidth*2-1;my=e.clientY/innerHeight*2-1;},{passive:true});
-    wrap.addEventListener('pointerdown',function(e){drag=true;lx=e.clientX;wrap.setPointerCapture(e.pointerId);});
-    wrap.addEventListener('pointermove',function(e){if(!drag)return;var d=e.clientX-lx;lx=e.clientX;spin+=d*.012;vel=d*.9;});
+    wrap.addEventListener('pointerdown',function(e){drag=true;lx=e.clientX;ly=e.clientY;wrap.setPointerCapture(e.pointerId);});
+    wrap.addEventListener('pointermove',function(e){if(!drag)return;var d=e.clientX-lx,dv=e.clientY-ly;lx=e.clientX;ly=e.clientY;spin+=d*.012;vel=d*.9;spinX+=dv*.012;velX=dv*.9;});
     wrap.addEventListener('pointerup',function(){drag=false;});
     var started=!document.documentElement.classList.contains('js')||document.documentElement.classList.contains('ready');
     var mo=new MutationObserver(function(){if(document.documentElement.classList.contains('ready')){started=true;vel=reduce?0:24;mo.disconnect();}});mo.observe(document.documentElement,{attributes:true,attributeFilter:['class']});
@@ -745,10 +745,11 @@ section{background:transparent}
     (function loop(now){requestAnimationFrame(loop);var dt=Math.min(.05,(now-last)/1000);last=now;if(!vis||document.hidden)return;
       var t=now/1000;
       if(!drag&&started){spin+=vel*dt;vel*=Math.pow(.18,dt);
-        if(Math.abs(vel)<.6){var tgt=Math.round(spin/(Math.PI*2))*Math.PI*2;spin+=(tgt-spin)*Math.min(1,dt*2.5);}}
+        if(Math.abs(vel)<.6){var tgt=Math.round(spin/(Math.PI*2))*Math.PI*2;spin+=(tgt-spin)*Math.min(1,dt*2.5);}
+        spinX+=velX*dt;velX*=Math.pow(.18,dt);if(Math.abs(velX)<.6){var tx=Math.round(spinX/(Math.PI*2))*Math.PI*2;spinX+=(tx-spinX)*Math.min(1,dt*2.5);}}
       rotY+=((reduce?0:mx*.55)+Math.sin(t*.6)*.12-rotY)*Math.min(1,dt*5);
       rotX+=((reduce?0:my*.4)+Math.cos(t*.5)*.06-rotX)*Math.min(1,dt*5);
-      coin.rotation.set(rotX,rotY+spin,0);coin.position.y=Math.sin(t*1.1)*.04;
+      coin.rotation.set(rotX+spinX,rotY+spin,0);coin.position.y=Math.sin(t*1.1)*.04;
       key.position.set(Math.cos(t*.7)*3+mx*2,2-my*2,4);
       R.render(scene,cam);
     })(last);
