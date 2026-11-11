@@ -333,7 +333,6 @@ section{background:transparent}
 @media (hover:none){
   .svc article.in::after{transform:scaleX(1);transition-delay:.5s}
   .svc article.in .ico{animation:wiggle 1s .6s both}
-  .sec-grid.in div::before{transform:scaleY(.06)}
   .project .device.in::after{animation:shine 1.4s .4s ease}
   .stat{animation:pulse 2.6s ease-in-out infinite}
   .svc article:active,.pack:active,.device:active{transform:scale(.98)}
@@ -342,6 +341,41 @@ section{background:transparent}
 }
 @keyframes wiggle{0%{transform:none}30%{transform:rotate(-12deg) scale(1.2)}60%{transform:rotate(8deg) scale(1.1)}100%{transform:none}}
 @keyframes pulse{50%{box-shadow:0 0 0 8px rgba(168,132,47,.12)}}
+
+
+/* ===== numbers band ===== */
+.numbers{background:#14234a;padding:clamp(56px,7vw,90px) 0;border-top:0}
+.nums{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:0}
+.num{padding:10px 30px;border-left:1px solid rgba(232,207,142,.25);display:flex;flex-direction:column;gap:10px}
+.num:first-child{border-left:0;padding-left:0}
+.num strong{font-family:var(--display);font-weight:700;font-size:clamp(56px,7vw,104px);line-height:1;color:#e8cf8e;font-variant-numeric:tabular-nums}
+.num>span{font-size:14px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:#c8cfe2;line-height:1.5}
+@media (max-width:860px){.nums{grid-template-columns:1fr 1fr;gap:34px 0}.num{border-left:0;padding:0}.num:first-child{grid-column:1/-1}}
+/* ===== floating showcase ===== */
+.showcase{position:relative}
+.chip-f{position:absolute;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;background:#fffdf8;border:1px solid rgba(168,132,47,.5);box-shadow:0 18px 40px -16px rgba(20,35,74,.45);font-size:14px;font-weight:600;letter-spacing:.04em;color:#14234a;white-space:nowrap;animation:float 6s ease-in-out infinite}
+.chip-f b{font-family:var(--display);font-size:22px;color:#a8842f;line-height:1}
+.chip-f.c1{top:16%;left:-34px}
+.chip-f.c2{top:46%;right:-30px;animation-delay:-2s}
+.chip-f.c3{bottom:-20px;left:12%;animation-delay:-4s;background:#14234a;color:#f6f2ea;border-color:#14234a}
+@keyframes float{50%{transform:translateY(-12px)}}
+@media (max-width:900px){.chip-f{padding:8px 12px;font-size:12px}.chip-f b{font-size:17px}.chip-f.c1{left:-6px;top:10%}.chip-f.c2{right:-6px}.chip-f.c3{bottom:-14px}}
+/* ===== dark security ===== */
+.dark{background:#14234a!important;border-top:0}
+.dark h2,.dark h3{color:#f6f2ea}.dark .it{color:#e8cf8e}.dark .label{color:#e8cf8e}.dark .head p,.dark p{color:#c8cfe2}
+.dark .label::after{background:#e8cf8e!important}
+.dark .sec-grid,.dark .sec-grid div{border-color:rgba(246,242,234,.16)}
+.dark .ico{color:#e8cf8e}
+.dark .sec-grid div::before{background:#e8cf8e}
+.dark .sec-grid div:hover h3,.dark .sec-grid div:hover p,.dark .sec-grid div:hover .ico{color:#14234a}
+/* ===== side dots ===== */
+.dots{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:14px}
+.dots a{position:relative;display:block;width:10px;height:10px;border-radius:50%;border:1.5px solid #14234a;background:transparent;transition:transform .3s,background-color .3s}
+.dots a.on{background:#a8842f;border-color:#a8842f;transform:scale(1.35)}
+.dots.inv a{border-color:#e8cf8e}
+.dots a::after{content:attr(data-t);position:absolute;right:20px;top:50%;transform:translate(6px,-50%);opacity:0;pointer-events:none;white-space:nowrap;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;background:#14234a;color:#f6f2ea;padding:5px 9px;transition:opacity .2s,transform .2s}
+.dots a:hover::after{opacity:1;transform:translate(0,-50%)}
+@media (max-width:1100px){.dots{display:none}}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
@@ -426,6 +460,17 @@ section{background:transparent}
   </div>
 </section>
 
+<section class="numbers" aria-label="In numbers">
+  <div class="wrap">
+    <div class="nums">
+      <div class="num rv"><strong><span class="count" data-to="26">26</span></strong><span>institutions run on our systems</span></div>
+      <div class="num rv"><strong><span class="count" data-to="15">15</span></strong><span>chadarim</span></div>
+      <div class="num rv"><strong><span class="count" data-to="7">7</span></strong><span>batei medrash</span></div>
+      <div class="num rv"><strong><span class="count" data-to="4">4</span></strong><span>schools</span></div>
+    </div>
+  </div>
+</section>
+
 <section id="services">
   <div class="wrap">
     <div class="head rv">
@@ -492,7 +537,7 @@ section{background:transparent}
 
     <article class="project">
       <div class="pname rv"><h3>Cheder Vizhnitz</h3><span class="label">Private school system</span></div>
-      <div class="device rv"><div class="bar"><i></i><i></i><i></i><em>Cheder management system</em><span class="priv">Private · login only</span></div><img src="img/cheder.png" width="1600" height="1000" alt="Cheder Vizhnitz management dashboard" loading="lazy"></div>
+      <div class="showcase"><div class="device rv"><div class="bar"><i></i><i></i><i></i><em>Cheder management system</em><span class="priv">Private · login only</span></div><img src="img/cheder.png" width="1600" height="1000" alt="Cheder Vizhnitz management dashboard" loading="lazy"></div><span class="chip-f c1"><b>15</b> chadarim</span><span class="chip-f c2">✓ Full Hebrew</span><span class="chip-f c3">🔒 Secure login</span></div>
       <div class="pinfo">
         <div class="rv"><p>A Hebrew management system for a cheder: students, tests, attendance, behaviour and reports for parents, all in one place.</p><div class="stat"><strong>15</strong><span>chadarim already<br>use this system</span></div></div>
         <ul class="facts rv"><li><svg class="ico" aria-hidden="true"><use href="#i-lang"/></svg><div><b>Type of work</b><span>Hebrew right-to-left management system</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-user"/></svg><div><b>In use</b><span>Already used by 15 chadarim</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg><div><b>Access</b><span>Staff login only, never public</span></div></li></ul>
@@ -501,7 +546,7 @@ section{background:transparent}
 
     <article class="project">
       <div class="pname rv"><h3>Beis Medrash</h3><span class="label">Private finance system</span></div>
-      <div class="device rv"><div class="bar"><i></i><i></i><i></i><em>Beis Medrash finance system</em><span class="priv">Private · login only</span></div><img src="img/beismedrash.png" width="1600" height="1000" alt="Beis Medrash finance dashboard" loading="lazy"></div>
+      <div class="showcase"><div class="device rv"><div class="bar"><i></i><i></i><i></i><em>Beis Medrash finance system</em><span class="priv">Private · login only</span></div><img src="img/beismedrash.png" width="1600" height="1000" alt="Beis Medrash finance dashboard" loading="lazy"></div><span class="chip-f c1"><b>7</b> batei medrash</span><span class="chip-f c2">✓ Replaces Access</span><span class="chip-f c3">🔒 Gabbai login</span></div>
       <div class="pinfo">
         <div class="rv"><p>A Hebrew finance system for a beis medrash: members and balances, payments, expenses, suppliers, simchas and reports, replacing an old Access database and spreadsheets.</p><div class="stat"><strong>7</strong><span>batei medrash already<br>use this system</span></div></div>
         <ul class="facts rv"><li><svg class="ico" aria-hidden="true"><use href="#i-lang"/></svg><div><b>Type of work</b><span>Hebrew right-to-left finance system</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-user"/></svg><div><b>In use</b><span>Already used by 7 batei medrash</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-sys"/></svg><div><b>Replaces</b><span>Access database and Excel sheets</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg><div><b>Access</b><span>Gabbai and admin login only</span></div></li></ul>
@@ -510,7 +555,7 @@ section{background:transparent}
 
     <article class="project">
       <div class="pname rv"><h3>Institution Finance</h3><span class="label">Private finance system</span></div>
-      <div class="device rv"><div class="bar"><i></i><i></i><i></i><em>School finance system</em><span class="priv">Private · login only</span></div><img src="img/finance.png" width="1600" height="1000" alt="School finance dashboard" loading="lazy"></div>
+      <div class="showcase"><div class="device rv"><div class="bar"><i></i><i></i><i></i><em>School finance system</em><span class="priv">Private · login only</span></div><img src="img/finance.png" width="1600" height="1000" alt="School finance dashboard" loading="lazy"></div><span class="chip-f c1"><b>4</b> schools</span><span class="chip-f c2">✓ Payment splitting</span><span class="chip-f c3">🔒 Admin only</span></div>
       <div class="pinfo">
         <div class="rv"><p>A private finance system for a school: families, fees, payments split between tuition, transport and refunds, staff, donations and reports.</p><div class="stat"><strong>4</strong><span>schools already<br>use this system</span></div></div>
         <ul class="facts rv"><li><svg class="ico" aria-hidden="true"><use href="#i-sys"/></svg><div><b>Type of work</b><span>Custom finance and management system</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-user"/></svg><div><b>In use</b><span>Already used by 4 schools</span></div></li><li><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Access</b><span>Administrator login only, never public</span></div></li></ul>
@@ -519,7 +564,7 @@ section{background:transparent}
   </div>
 </section>
 
-<section id="security">
+<section id="security" class="dark">
   <div class="wrap">
     <div class="head rv">
       <span class="label">Secure by design</span>
@@ -583,6 +628,9 @@ section{background:transparent}
     <span>© 2026 NC Graphics · Websites &amp; Graphic Design · London</span>
   </div>
 </footer>
+<nav class="dots" aria-label="Page sections">
+  <a href="#top" data-t="Home"></a><a href="#studio" data-t="Studio"></a><a href="#services" data-t="Services"></a><a href="#work" data-t="Work"></a><a href="#security" data-t="Security"></a><a href="#packages" data-t="Packages"></a><a href="#contact" data-t="Contact"></a>
+</nav>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -682,6 +730,22 @@ section{background:transparent}
     addEventListener('load',go);
     loop();
   })();
+
+  /* ===== counters ===== */
+  [].forEach.call(document.querySelectorAll('.count'),function(c){
+    var to=+c.dataset.to;if(reduce||!('IntersectionObserver' in window))return;c.textContent='0';
+    var o=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;o.disconnect();var t0=performance.now();
+      (function f(t){var k=Math.min(1,(t-t0)/1600);c.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f);})(t0);},{threshold:.5});
+    o.observe(c);});
+
+  /* ===== side dots follow the page ===== */
+  (function(){var dots=[].slice.call(document.querySelectorAll('.dots a')),box=document.querySelector('.dots');
+    var secs=dots.map(function(a){return document.querySelector(a.getAttribute('href'));});
+    function upd(){var mid=innerHeight*.45,k=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<mid)k=i;});
+      dots.forEach(function(d,i){d.classList.toggle('on',i===k);});
+      var dk=false;[].forEach.call(document.querySelectorAll('.dark,.numbers,.band,footer'),function(s){var r=s.getBoundingClientRect();if(r.top<innerHeight/2&&r.bottom>innerHeight/2)dk=true;});
+      box.classList.toggle('inv',dk);}
+    addEventListener('scroll',upd,{passive:true});upd();})();
   if(typeof THREE==='undefined'){root.classList.add('no-gl');}
   /* ===== the 3D gold coin ===== */
   (function(){
