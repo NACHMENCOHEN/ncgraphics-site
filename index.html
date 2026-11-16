@@ -436,6 +436,22 @@ section{background:transparent}
 .loaded .hero.sea>.wrap{opacity:1;transform:none}
 .hero.sea .stroke path{animation-play-state:paused}.loaded .hero.sea .stroke path{animation-play-state:running}
 
+
+/* ===== logo marquee ===== */
+.logos{background:#fffdf8;overflow:hidden;padding-bottom:clamp(60px,7vw,100px)}
+.lrow{overflow:hidden;padding:12px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ltrack{display:flex;gap:26px;width:max-content}
+.l1{animation:lm 42s linear infinite}
+.l2{animation:lm 48s linear infinite reverse;margin-left:-160px}
+.lrow:hover .ltrack{animation-play-state:paused}
+@keyframes lm{to{transform:translateX(-50%)}}
+.lg{flex:none;width:clamp(200px,20vw,270px);aspect-ratio:1.15;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:22px;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .3s}
+.lg img{max-width:82%;max-height:72%;object-fit:contain;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.lg figcaption{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--soft);transition:color .3s}
+.lg:hover{transform:translateY(-8px);box-shadow:0 26px 50px -28px rgba(20,35,74,.45);border-color:#a8842f}
+.lg:hover img{transform:scale(1.08)}
+.lg:hover figcaption{color:#a8842f}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
   .js .rv{opacity:1;transform:none}
@@ -670,12 +686,11 @@ section{background:transparent}
   </div>
 </section>
 
-<div class="clients" aria-label="Clients">
-  <div class="track">
-    <span>Yoeli's Post</span><span>GoldClean</span><span>Nachman Cohen</span><span>18 Chadarim</span><span>7 Batei Medrash</span><span>4 Schools</span>
-    <span>Yoeli's Post</span><span>GoldClean</span><span>Nachman Cohen</span><span>18 Chadarim</span><span>7 Batei Medrash</span><span>4 Schools</span>
-  </div>
-</div>
+<section class="logos" id="logos" aria-label="Logos we designed">
+  <div class="wrap"><div class="head rv"><span class="label">Brand design</span><h2>Logos we created. <span class="it">Brands that stand out.</span></h2></div></div>
+  <div class="lrow"><div class="ltrack l1"><figure class="lg"><img src="img/logos/pundak.png" alt="HaPundak HaYehudi logo" loading="lazy"><figcaption>HaPundak HaYehudi</figcaption></figure><figure class="lg"><img src="img/logos/greenbergers.png" alt="Greenberger's logo" loading="lazy"><figcaption>Greenberger's</figcaption></figure><figure class="lg"><img src="img/logos/fruitable.png" alt="Fruitable logo" loading="lazy"><figcaption>Fruitable</figcaption></figure><figure class="lg"><img src="img/logos/pundak.png" alt="HaPundak HaYehudi logo" loading="lazy"><figcaption>HaPundak HaYehudi</figcaption></figure><figure class="lg"><img src="img/logos/greenbergers.png" alt="Greenberger's logo" loading="lazy"><figcaption>Greenberger's</figcaption></figure><figure class="lg"><img src="img/logos/fruitable.png" alt="Fruitable logo" loading="lazy"><figcaption>Fruitable</figcaption></figure><figure class="lg"><img src="img/logos/pundak.png" alt="HaPundak HaYehudi logo" loading="lazy"><figcaption>HaPundak HaYehudi</figcaption></figure><figure class="lg"><img src="img/logos/greenbergers.png" alt="Greenberger's logo" loading="lazy"><figcaption>Greenberger's</figcaption></figure><figure class="lg"><img src="img/logos/fruitable.png" alt="Fruitable logo" loading="lazy"><figcaption>Fruitable</figcaption></figure><figure class="lg"><img src="img/logos/pundak.png" alt="HaPundak HaYehudi logo" loading="lazy"><figcaption>HaPundak HaYehudi</figcaption></figure><figure class="lg"><img src="img/logos/greenbergers.png" alt="Greenberger's logo" loading="lazy"><figcaption>Greenberger's</figcaption></figure><figure class="lg"><img src="img/logos/fruitable.png" alt="Fruitable logo" loading="lazy"><figcaption>Fruitable</figcaption></figure></div></div>
+  <div class="lrow"><div class="ltrack l2"><figure class="lg"><img src="img/logos/pundak.png" alt="HaPundak HaYehudi logo" loading="lazy"><figcaption>HaPundak HaYehudi</figcaption></figure><figure class="lg"><img src="img/logos/greenbergers.png" alt="Greenberger's logo" loading="lazy"><figcaption>Greenberger's</figcaption></figure><figure class="lg"><img src="img/logos/fruitable.png" alt="Fruitable logo" loading="lazy"><figcaption>Fruitable</figcaption></figure><figure class="lg"><img src="img/logos/pundak.png" alt="HaPundak HaYehudi logo" loading="lazy"><figcaption>HaPundak HaYehudi</figcaption></figure><figure class="lg"><img src="img/logos/greenbergers.png" alt="Greenberger's logo" loading="lazy"><figcaption>Greenberger's</figcaption></figure><figure class="lg"><img src="img/logos/fruitable.png" alt="Fruitable logo" loading="lazy"><figcaption>Fruitable</figcaption></figure><figure class="lg"><img src="img/logos/pundak.png" alt="HaPundak HaYehudi logo" loading="lazy"><figcaption>HaPundak HaYehudi</figcaption></figure><figure class="lg"><img src="img/logos/greenbergers.png" alt="Greenberger's logo" loading="lazy"><figcaption>Greenberger's</figcaption></figure><figure class="lg"><img src="img/logos/fruitable.png" alt="Fruitable logo" loading="lazy"><figcaption>Fruitable</figcaption></figure><figure class="lg"><img src="img/logos/pundak.png" alt="HaPundak HaYehudi logo" loading="lazy"><figcaption>HaPundak HaYehudi</figcaption></figure><figure class="lg"><img src="img/logos/greenbergers.png" alt="Greenberger's logo" loading="lazy"><figcaption>Greenberger's</figcaption></figure><figure class="lg"><img src="img/logos/fruitable.png" alt="Fruitable logo" loading="lazy"><figcaption>Fruitable</figcaption></figure></div></div>
+</section>
 
 <section class="ctastrip" aria-label="Start a project">
   <div class="wrap">
