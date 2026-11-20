@@ -721,7 +721,7 @@ section{background:transparent}
     <span>© 2026 NC Graphics · Websites &amp; Graphic Design · London</span>
   </div>
 </footer>
-<div class="cring" aria-hidden="true"></div><div class="cdot" aria-hidden="true"></div>
+
 <nav class="dots" aria-label="Page sections">
   <a href="#top" data-t="Home"></a><a href="#studio" data-t="Studio"></a><a href="#services" data-t="Services"></a><a href="#work" data-t="Work"></a><a href="#security" data-t="Security"></a><a href="#packages" data-t="Packages"></a><a href="#contact" data-t="Contact"></a>
 </nav>
@@ -846,14 +846,6 @@ section{background:transparent}
     var dk=[].slice.call(document.querySelectorAll('.dark,.numbers,.band,footer,.ctastrip')),tq=false;
     addEventListener('scroll',function(){if(tq)return;tq=true;requestAnimationFrame(function(){tq=false;upd();});},{passive:true});upd();})();
 
-  /* ===== custom cursor (desktop) ===== */
-  if(!reduce&&matchMedia('(pointer: fine)').matches){
-    var cr=document.querySelector('.cring'),cd=document.querySelector('.cdot'),tx=0,ty=0,rx=0,ry=0,on=false;
-    addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;cd.style.transform='translate('+tx+'px,'+ty+'px)';if(!on){on=true;rx=tx;ry=ty;cr.classList.add('on');cd.classList.add('on');}},{passive:true});
-    document.addEventListener('mouseleave',function(){on=false;cr.classList.remove('on');cd.classList.remove('on');});
-    document.addEventListener('mouseover',function(e){cr.classList.toggle('big',!!e.target.closest('a,button,.svc article,.device,.pack,.coin-wrap'));});
-    (function l(){requestAnimationFrame(l);rx+=(tx-rx)*.35;ry+=(ty-ry)*.35;cr.style.transform='translate('+rx+'px,'+ry+'px)';})();
-  }
 
   /* ===== loader ===== */
   (function(){
