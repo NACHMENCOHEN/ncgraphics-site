@@ -278,6 +278,13 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
 .quote .av{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(46,196,241,.12);border:1px solid rgba(46,196,241,.35);color:var(--acc);font-family:var(--display);font-weight:700}
 .quote .by b{display:block;color:var(--white);font-size:15.5px}.quote .by small{color:var(--soft);font-size:13.5px;font-weight:600}
 .stars{margin-left:auto;color:#f5c451;letter-spacing:2px;font-size:16px}
+
+.tst.two{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:none}
+.tst.two .quote{display:flex;flex-direction:column}.tst.two .quote .by{margin-top:auto}
+.quote .main{font-size:clamp(18px,1.6vw,21px);color:var(--white);font-weight:600;line-height:1.6;position:relative}
+.quote blockquote{margin-bottom:26px}
+.tst.two .quote .he{font-size:clamp(18px,1.7vw,22px)}
+@media (max-width:900px){.tst.two{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -390,7 +397,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
   </div>
 </section>
 
-<section id="clients" style="padding-bottom:0"><div class="wrap"><div class="head rv"><span class="eyebrow">What clients say</span><h2>In their <span class="acc">own words.</span></h2></div><div class="tst"><figure class="quote rv"><blockquote><p class="he" lang="he">״אני מאוד מאוד נהנה. לדוגמא, אני לא צריך לשבת במחשב הרבה זמן לעדכן דברים. אני יודע בדיוק את כל ההכנסות וכל ההוצאות, הכל ברור וכולם נהנים מזה.״</p><p class="en">“I really enjoy it. I don't need to sit at the computer for hours to update things, I know exactly where all the income and expenses stand, everything is clear, and everyone is happy with it.”</p></blockquote><figcaption class="by"><span class="av">ב</span><span><b>Gabbai · Beis Medrash, London</b><small>Uses our Beis Medrash finance system</small></span></figcaption></figure></div></div></section>
+<section id="clients" style="padding-bottom:0"><div class="wrap"><div class="head rv"><span class="eyebrow">What clients say</span><h2>In their <span class="acc">own words.</span></h2></div><div class="tst two"><figure class="quote rv"><blockquote><p class="main">“NC Graphics has made a huge difference to our business. Since launching our website, we’ve gained around 50 additional orders per week. Google brings local customers directly to us, and the website makes ordering incredibly easy. We’re extremely happy with the results and highly recommend NC Graphics!”</p></blockquote><figcaption class="by"><span class="av">G</span><span><b>GoldClean</b><small>Laundry service, Stamford Hill · <a href="https://goldclean.uk" style="color:var(--acc);text-decoration:none">goldclean.uk</a></small></span></figcaption></figure><figure class="quote rv"><blockquote><p class="he" lang="he">״אני מאוד מאוד נהנה. לדוגמא, אני לא צריך לשבת במחשב הרבה זמן לעדכן דברים. אני יודע בדיוק את כל ההכנסות וכל ההוצאות, הכל ברור וכולם נהנים מזה.״</p><p class="en">“I really enjoy it. I don't need to sit at the computer for hours to update things, I know exactly where all the income and expenses stand, everything is clear, and everyone is happy with it.”</p></blockquote><figcaption class="by"><span class="av">ב</span><span><b>Gabbai · Beis Medrash, London</b><small>Uses our Beis Medrash finance system</small></span></figcaption></figure></div></div></section>
 
 <section id="websites">
   <div class="wrap">
