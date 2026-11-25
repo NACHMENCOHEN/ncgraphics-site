@@ -364,13 +364,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
   </div>
 </section>
 
-<section id="brands" style="background:var(--bg2);padding-bottom:clamp(70px,8vw,110px)">
-  <div class="wrap"><div class="head rv"><span class="eyebrow">Brand design</span><h2>Logos we created.</h2></div></div>
-  <div class="lrow"><div class="lt" id="lt1"></div></div>
-  <div class="lrow"><div class="lt r" id="lt2"></div></div>
-</section>
-
-<section id="security">
+<section id="security" style="background:var(--bg2)">
   <div class="wrap">
     <div class="head rv"><span class="eyebrow">Secure by design</span><h2>Your data, <span class="acc">properly protected.</span></h2><p class="lede">Our systems handle payments, donations and family records, so security is part of the plan from day one.</p></div>
     <div class="secg">
@@ -384,7 +378,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
   </div>
 </section>
 
-<section id="process" style="background:var(--bg2)">
+<section id="process">
   <div class="wrap">
     <div class="head rv"><span class="eyebrow">How we work</span><h2>Simple process. <span class="acc">Serious detail.</span></h2></div>
     <div class="steps">
@@ -426,10 +420,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
   var root=document.documentElement;root.classList.add('js');
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(pointer: fine)').matches;
 
-  /* logos we designed */
-  var L=[['pundak','HaPundak HaYehudi'],['greenbergers',"Greenberger's"],['fruitable','Fruitable'],['siyum','Siyum HaZman']];
-  function row(order){var h='';for(var r=0;r<3;r++)order.forEach(function(i){h+='<figure class="lg"><img src="img/logos/'+L[i][0]+'.webp" alt="'+L[i][1]+' logo"><figcaption>'+L[i][1]+'</figcaption></figure>';});return h+h;}
-  document.getElementById('lt1').innerHTML=row([0,1,2,3]);document.getElementById('lt2').innerHTML=row([2,3,0,1]);
 
   /* reveal */
   var rv=[].slice.call(document.querySelectorAll('.rv'));
