@@ -65,7 +65,9 @@ section{padding:clamp(84px,10vw,130px) 0;position:relative}
 nav{position:sticky;top:0;z-index:50;background:rgba(7,11,24,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 nav .in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:74px}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white)}
-.logo svg{width:42px;height:42px}
+.logo img{height:56px;width:auto}
+footer .logo img{height:40px}
+@media (max-width:560px){.logo img{height:46px}}
 .logo b{display:block;font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:.06em;line-height:1}
 .logo small{display:block;font-size:10.5px;letter-spacing:.24em;color:var(--soft);margin-top:4px;font-weight:600}
 .links{display:flex;align-items:center;gap:30px;list-style:none}
@@ -260,7 +262,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
 
 <nav aria-label="Main">
   <div class="wrap in">
-    <a class="logo" href="#top" aria-label="NC Graphics home"><svg aria-hidden="true"><use href="#seal"/></svg><span><b>NC GRAPHICS</b><small>DESIGN &amp; DIGITAL</small></span></a>
+    <a class="logo" href="#top" aria-label="NC Graphics home"><img src="img/logo-nc.png" alt="NC Graphics – Design &amp; Digital" width="1000" height="282"></a>
     <ul class="links">
       <li><a href="#services">Services</a></li>
       <li><a href="#systems">Systems</a></li>
@@ -412,7 +414,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
 </section>
 
 <footer>
-  <div class="wrap"><a class="logo" href="#top"><svg aria-hidden="true"><use href="#seal"/></svg><span><b>NC GRAPHICS</b><small>DESIGN &amp; DIGITAL</small></span></a><span>© 2026 NC Graphics · Websites, systems &amp; design · London</span></div>
+  <div class="wrap"><a class="logo" href="#top"><img src="img/logo-nc.png" alt="NC Graphics – Design &amp; Digital" width="1000" height="282"></a><span>© 2026 NC Graphics · Websites, systems &amp; design · London</span></div>
 </footer>
 
 <script>
