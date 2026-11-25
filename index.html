@@ -268,6 +268,16 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
 .js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.js .rv{opacity:1;transform:none}}
 @media (max-width:560px){body{font-size:16.5px}.trust{gap:20px}.trust b{font-size:26px}.big b{font-size:46px}}
+
+.tst{display:grid;grid-template-columns:minmax(0,1fr);max-width:900px}
+.quote{position:relative;background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid rgba(46,196,241,.3);border-radius:24px;padding:clamp(30px,4vw,48px);overflow:hidden}
+.quote::before{content:"\201C";position:absolute;top:-24px;left:24px;font-family:var(--display);font-size:180px;line-height:1;color:rgba(46,196,241,.14)}
+.quote .he{direction:rtl;text-align:right;font-size:clamp(20px,2.2vw,26px);color:var(--white);font-weight:600;line-height:1.6;position:relative}
+.quote .en{margin-top:16px;color:var(--text);font-size:16.5px;font-style:italic;position:relative}
+.quote .by{display:flex;align-items:center;gap:14px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+.quote .av{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(46,196,241,.12);border:1px solid rgba(46,196,241,.35);color:var(--acc);font-family:var(--display);font-weight:700}
+.quote .by b{display:block;color:var(--white);font-size:15.5px}.quote .by small{color:var(--soft);font-size:13.5px;font-weight:600}
+.stars{margin-left:auto;color:#f5c451;letter-spacing:2px;font-size:16px}
 </style>
 </head>
 <body>
@@ -379,6 +389,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
     </div>
   </div>
 </section>
+
+<section id="clients" style="padding-bottom:0"><div class="wrap"><div class="head rv"><span class="eyebrow">What clients say</span><h2>In their <span class="acc">own words.</span></h2></div><div class="tst"><figure class="quote rv"><blockquote><p class="he" lang="he">״אני מאוד מאוד נהנה. לדוגמא, אני לא צריך לשבת במחשב הרבה זמן לעדכן דברים. אני יודע בדיוק את כל ההכנסות וכל ההוצאות, הכל ברור וכולם נהנים מזה.״</p><p class="en">“I really enjoy it. I don't need to sit at the computer for hours to update things, I know exactly where all the income and expenses stand, everything is clear, and everyone is happy with it.”</p></blockquote><figcaption class="by"><span class="av">ב</span><span><b>Gabbai · Beis Medrash, London</b><small>Uses our Beis Medrash finance system</small></span></figcaption></figure></div></div></section>
 
 <section id="websites">
   <div class="wrap">
