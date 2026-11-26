@@ -63,7 +63,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17
 a{color:inherit}
 img{max-width:100%;display:block}
 :focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:6px}
-.wrap{max-width:1220px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.wrap{max-width:1720px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
 h1,h2,h3{font-family:var(--display);color:var(--white);letter-spacing:-.02em;line-height:1.08;text-wrap:balance}
 h2{font-size:clamp(34px,4.6vw,58px);font-weight:700}
 h3{font-size:22px;font-weight:600}
@@ -329,6 +329,28 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
 .dk-stage .quote.p2{transform:translateY(58px) translateZ(-120px) rotateX(10deg) scale(.92)!important}
 .dk-stage .quote.out-l{transform:translateX(-160px) rotateY(28deg) rotate(-3deg)!important}
 .dk-stage .quote.out-r{transform:translateX(160px) rotateY(-28deg) rotate(3deg)!important}
+
+/* scroll story */
+.story{position:relative;height:340vh;background:linear-gradient(180deg,var(--bg),#060a17 50%,var(--bg))}
+.story .pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.story .pin::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 55%,rgba(46,196,241,.16),transparent 70%);pointer-events:none}
+.st-caps{position:absolute;top:clamp(84px,13vh,140px);left:0;right:0;text-align:center;padding:0 20px;z-index:5;height:150px}
+.st-cap{position:absolute;left:0;right:0;opacity:0;transform:translateY(24px);transition:opacity .45s ease,transform .45s ease}
+.st-cap.on{opacity:1;transform:none}
+.st-cap small{display:block;font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin-bottom:12px}
+.st-cap b{display:block;font-family:var(--display);font-weight:800;color:var(--white);font-size:clamp(30px,4.4vw,60px);line-height:1.05;letter-spacing:-.02em}
+.st-cap b span{background:linear-gradient(90deg,#7fe3ff,var(--acc) 45%,#5b8cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.st-scene{position:relative;width:min(1100px,74vw);aspect-ratio:16/10;margin-top:clamp(120px,16vh,170px);perspective:1400px;transform-style:preserve-3d}
+.st-scr{position:absolute;inset:0;border-radius:14px;overflow:hidden;background:#0d1430;border:1px solid rgba(148,174,230,.28);box-shadow:0 60px 120px -40px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.03),0 0 80px -20px rgba(46,196,241,.35);transform-origin:50% 60%;backface-visibility:hidden}
+.st-scr .bar{display:flex;align-items:center;gap:6px;height:28px;padding:0 12px;background:#111a38;border-bottom:1px solid var(--line);font-size:12px;color:var(--soft)}
+.st-scr .bar i{width:8px;height:8px;border-radius:50%;background:#2a3762}.st-scr .bar em{font-style:normal;margin-left:8px}
+.st-scr img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top}
+.st-prog{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);width:160px;height:3px;border-radius:3px;background:rgba(148,174,230,.2);overflow:hidden}
+.st-prog i{display:block;height:100%;width:0;background:var(--acc)}
+@media (max-width:700px){.story{height:300vh}.st-scene{width:88vw;margin-top:150px}.st-caps{top:90px}}
+@media (prefers-reduced-motion:reduce){.story{height:auto}.story .pin{position:relative;height:auto;padding:80px 0}}
+
+@media (min-width:1600px){.hero h1{font-size:clamp(74px,5vw,96px)}.lede{font-size:20px;max-width:62ch}h2{font-size:clamp(58px,3.6vw,70px)}.cards,.secg,.steps,.packs,.webs{gap:26px}.card,.pack{padding:40px 36px}}
 </style>
 </head>
 <body>
@@ -390,6 +412,23 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
     </div>
   </div>
 </header>
+
+<section class="story" id="story" aria-label="Our systems">
+  <div class="pin">
+    <div class="st-caps">
+      <div class="st-cap on"><small>Cheder system</small><b>18 chadarim <span>run on it.</span></b></div>
+      <div class="st-cap"><small>Beis Medrash finance</small><b>7 batei medrash <span>left Excel behind.</span></b></div>
+      <div class="st-cap"><small>School finance</small><b>4 schools <span>split every payment.</span></b></div>
+      <div class="st-cap"><small>NC Graphics</small><b>One studio. <span>29 institutions.</span></b></div>
+    </div>
+    <div class="st-scene" id="stScene">
+      <div class="st-scr" data-i="0"><div class="bar"><i></i><i></i><i></i><em>Cheder management system</em></div><img src="img/cheder.webp" width="1600" height="1000" alt="Cheder management system" decoding="async"></div>
+      <div class="st-scr" data-i="1"><div class="bar"><i></i><i></i><i></i><em>Beis Medrash finance system</em></div><img src="img/beismedrash.webp" width="1600" height="1000" alt="Beis Medrash finance system" decoding="async"></div>
+      <div class="st-scr" data-i="2"><div class="bar"><i></i><i></i><i></i><em>School finance system</em></div><img src="img/finance.webp" width="1600" height="1000" alt="School finance system" decoding="async"></div>
+    </div>
+    <div class="st-prog" aria-hidden="true"><i id="stProg"></i></div>
+  </div>
+</section>
 
 <div class="trusted">
   <p>Trusted by businesses and institutions</p>
@@ -592,6 +631,28 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
     deck.addEventListener('keydown',function(e){if(e.key==='ArrowRight')go(cur+1,1);if(e.key==='ArrowLeft')go(cur-1,-1);});
     var x0=null;st.addEventListener('pointerdown',function(e){x0=e.clientX;});st.addEventListener('pointerup',function(e){if(x0===null)return;var dx=e.clientX-x0;x0=null;if(Math.abs(dx)>40)go(cur+(dx<0?1:-1),dx<0?1:-1);});
     paint();size();addEventListener('resize',size);if(document.fonts)document.fonts.ready.then(size);addEventListener('load',size);
+  })();
+
+  /* scroll story: screens fly and assemble in 3D as you scroll */
+  (function(){var sec=document.getElementById('story');if(!sec||reduce)return;
+    var scr=[].slice.call(sec.querySelectorAll('.st-scr')),caps=[].slice.call(sec.querySelectorAll('.st-cap')),bar=document.getElementById('stProg'),raf=0,lastCap=-1;
+    function cl(v){return v<0?0:v>1?1:v;}function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}function L(a,b,t){return a+(b-a)*t;}
+    function seg(p,a,b){return ease(cl((p-a)/(b-a)));}
+    function T(el,x,y,z,rx,ry,rz,sc,op){el.style.transform='translate3d('+x+'%,'+y+'%,'+z+'px) rotateX('+rx+'deg) rotateY('+ry+'deg) rotateZ('+rz+'deg) scale('+sc+')';el.style.opacity=op;}
+    function draw(){raf=0;var r=sec.getBoundingClientRect(),span=sec.offsetHeight-innerHeight,p=cl(-r.top/span);
+      if(r.bottom<0||r.top>innerHeight)return;
+      var a=seg(p,0,.22),b=seg(p,.28,.5),c=seg(p,.56,.76),d=seg(p,.8,.97);
+      // screen 0: rises from the floor, flips up, then steps back-left
+      T(scr[0],L(0,-34,b)+L(0,4,d),L(70,0,a)+L(0,4,b),L(-600,0,a)+L(0,-260,b)+L(0,80,d),L(75,0,a)+L(0,4,b),L(0,24,b)+L(0,-6,d),L(-8,0,a),L(.7,1,a)-L(0,.08,b)+L(0,.02,d),a);
+      // screen 1: swings in from the right, then steps back-right
+      T(scr[1],L(120,0,b)+L(0,34,c)+L(0,-4,d),L(0,4,c),L(-200,0,b)+L(0,-260,c)+L(0,80,d),L(0,4,c),L(-70,0,b)+L(0,-24,c)+L(0,6,d),0,L(.9,1,b)-L(0,.08,c)+L(0,.02,d),b);
+      // screen 2: drops from above to the front, then joins the fan
+      T(scr[2],0,L(30,0,c)+L(0,10,d),L(700,0,c)+L(0,-40,d),L(-20,0,c)+L(0,4,d),0,L(6,0,c),L(1,1,c)-L(0,.12,d),c);
+      scr[0].style.zIndex=1;scr[1].style.zIndex=2;scr[2].style.zIndex=3;
+      var k=p<.27?0:p<.55?1:p<.79?2:3;if(k!==lastCap){caps.forEach(function(e,i){e.classList.toggle('on',i===k);});lastCap=k;}
+      bar.style.width=(p*100)+'%';}
+    function q(){if(!raf)raf=requestAnimationFrame(draw);}
+    addEventListener('scroll',q,{passive:true});addEventListener('resize',q);draw();
   })();
   /* mobile menu */
   var b=document.getElementById('burger'),m=document.getElementById('mmenu');
