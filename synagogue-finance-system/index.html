@@ -72,7 +72,7 @@
 <span>© 2026 NC Graphics · London</span></div></footer>
 <script>
 (function(){var r=document.documentElement;r.classList.add('js');var rv=[].slice.call(document.querySelectorAll('.rv'));
-if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});rv.forEach(function(el){io.observe(el);});}else rv.forEach(function(el){el.classList.add('in');});
+if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px 25% 0px'});rv.forEach(function(el){io.observe(el);});}else rv.forEach(function(el){el.classList.add('in');});
 var b=document.getElementById('burger'),m=document.getElementById('mmenu');function set(o){r.classList.toggle('open',o);b.setAttribute('aria-expanded',o);m.setAttribute('aria-hidden',!o);}
 b.addEventListener('click',function(){set(!r.classList.contains('open'));});[].forEach.call(m.querySelectorAll('a'),function(a){a.addEventListener('click',function(){set(false);});});})();
 </script>
