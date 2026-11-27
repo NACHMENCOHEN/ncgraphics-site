@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"FRL";font-weight:500;src:url(node_modules/@fontsource/frank-ruhl-libre/files/frank-ruhl-libre-hebrew-500-normal.woff2)}
+@font-face{font-family:"FRL";font-weight:700;src:url(node_modules/@fontsource/frank-ruhl-libre/files/frank-ruhl-libre-hebrew-700-normal.woff2)}
+@font-face{font-family:"FRL";font-weight:900;src:url(node_modules/@fontsource/frank-ruhl-libre/files/frank-ruhl-libre-hebrew-900-normal.woff2)}
+@font-face{font-family:"Heebo";font-weight:700;src:url(node_modules/@fontsource/heebo/files/heebo-hebrew-700-normal.woff2)}
+@font-face{font-family:"Heebo";font-weight:800;src:url(node_modules/@fontsource/heebo/files/heebo-hebrew-800-normal.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#05070d}
+body{font-family:"FRL",serif;position:relative;color:#f4e3b5}
+:root{--gold:linear-gradient(180deg,#fff4cf 0%,#f1cf7c 28%,#b98a2e 52%,#f6dc95 70%,#9a6f22 100%)}
+.gold{background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* ===== background ===== */
+#bg{position:absolute;inset:0;background:radial-gradient(1100px 900px at 50% 62%,#14213d 0%,#0a1020 45%,#05070d 80%)}
+#dam{position:absolute;inset:0;opacity:.13}
+#rays{position:absolute;left:50%;top:1150px;width:2600px;height:2600px;margin:-1300px 0 0 -1300px;background:repeating-conic-gradient(from 0deg,rgba(241,207,124,.10) 0deg 4deg,transparent 4deg 15deg);-webkit-mask:radial-gradient(circle,#000 0%,transparent 55%);mask:radial-gradient(circle,#000 0%,transparent 55%)}
+#dust{position:absolute;inset:0}
+.d{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff8dc 0%,#f1cf7c 35%,rgba(241,207,124,0) 70%)}
+/* ===== top clip frame ===== */
+#clipbox{position:absolute;left:48px;right:48px;top:48px;height:552px;border-radius:6px}
+#clipbox::before{content:"";position:absolute;inset:-14px;border-radius:12px;padding:3px;background:var(--gold);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+#clipbox::after{content:"";position:absolute;inset:-6px;border:1px solid rgba(241,207,124,.55);border-radius:8px}
+#hole{position:absolute;inset:0;background:#000;border-radius:6px;overflow:hidden}
+#fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(600px 420px at 50% 70%,rgba(255,170,70,.35),transparent 70%),linear-gradient(180deg,#120b05,#1d1208)}
+#fallback h1{font-weight:900;font-size:140px;line-height:1}
+#fallback p{font-weight:500;font-size:46px;color:#f7e6c4;margin-top:8px}
+.vig{position:absolute;inset:0;box-shadow:inset 0 0 120px 30px rgba(0,0,0,.65);pointer-events:none;border-radius:6px}
+/* medallion divider */
+#div{position:absolute;left:0;right:0;top:640px;height:120px;display:flex;align-items:center;justify-content:center}
+#div .ln{position:absolute;top:58px;height:2px;width:380px;background:linear-gradient(90deg,transparent,#f1cf7c)}
+#div .ln.r{right:60px;background:linear-gradient(270deg,transparent,#f1cf7c)}#div .ln.l{left:60px}
+#med{position:relative;width:120px;height:120px}
+/* ===== title ===== */
+#title{position:absolute;top:770px;left:0;right:0;text-align:center}
+#title h2{font-weight:900;font-size:108px;line-height:1;letter-spacing:.01em;position:relative;display:inline-block}
+#shine{position:absolute;inset:0;background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.85) 50%,transparent 60%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:300% 100%}
+#title .sub{margin-top:14px;font-weight:700;font-size:46px;color:#f4e3b5}
+#title .sub b{font-weight:900}
+#title .dt{margin-top:6px;font-family:"Heebo";font-weight:700;font-size:28px;letter-spacing:.06em;color:rgba(244,227,181,.65)}
+/* ===== table ===== */
+#tbox{position:absolute;left:70px;right:70px;top:1010px;height:720px}
+#tbox svg.frame{position:absolute;inset:-26px;width:calc(100% + 52px);height:calc(100% + 52px);overflow:visible}
+.page{position:absolute;inset:34px 40px 30px}
+.hrow{display:grid;grid-template-columns:1.45fr repeat(4,1fr);height:64px;align-items:end;padding-bottom:12px;border-bottom:2px solid rgba(241,207,124,.55)}
+.hrow div{text-align:center;font-family:"Heebo";font-weight:800;font-size:27px;letter-spacing:.04em;color:#f1cf7c}
+.zr{display:grid;grid-template-columns:1.45fr repeat(4,1fr);height:72px;align-items:center;border-bottom:1px solid rgba(241,207,124,.16)}
+.zr:nth-child(even){background:linear-gradient(90deg,transparent,rgba(241,207,124,.06),transparent)}
+.zr .lb{font-weight:700;font-size:31px;color:#efe3c6;padding-right:6px;white-space:nowrap}
+.zr .v{text-align:center;font-weight:900;font-size:46px;direction:ltr;font-variant-numeric:lining-nums tabular-nums}
+.zr .v.w{color:#f7efdc;background:none;-webkit-text-fill-color:#f7efdc}
+.zr.key .lb{color:#f1cf7c}
+.dots{position:absolute;bottom:-8px;left:0;right:0;display:flex;justify-content:center;gap:12px}
+.dots i{width:10px;height:10px;border-radius:50%;border:1.5px solid #f1cf7c}
+/* ===== footer plaque ===== */
+#plaque{position:absolute;left:150px;right:150px;bottom:62px;height:118px;border-radius:59px;background:linear-gradient(180deg,#0e1424,#060912);box-shadow:0 0 0 2px #b98a2e,0 0 0 6px #05070d,0 0 0 7.5px rgba(241,207,124,.6),0 20px 50px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:18px;font-weight:700;font-size:36px;color:#f4e3b5;white-space:nowrap}
+.msg img{height:34px}
+.msg .gold{font-weight:900}
+.msg .en{font-family:"Heebo";direction:ltr;font-size:32px;letter-spacing:.03em}
+#note{position:absolute;left:0;right:0;bottom:16px;text-align:center;font-family:"Heebo";font-weight:700;font-size:19px;color:rgba(244,227,181,.42)}
+</style></head><body>
+<div id="bg"></div>
+<svg id="dam" width="1080" height="1920"><defs><pattern id="pt" width="180" height="180" patternUnits="userSpaceOnUse"><g fill="none" stroke="#f1cf7c" stroke-width="2">
+<path d="M90 10 C120 40 120 70 90 90 C60 70 60 40 90 10Z"/><path d="M90 170 C120 140 120 110 90 90 C60 110 60 140 90 170Z"/><path d="M10 90 C40 60 70 60 90 90 C70 120 40 120 10 90Z"/><path d="M170 90 C140 60 110 60 90 90 C110 120 140 120 170 90Z"/><circle cx="90" cy="90" r="8"/><circle cx="0" cy="0" r="22"/><circle cx="180" cy="0" r="22"/><circle cx="0" cy="180" r="22"/><circle cx="180" cy="180" r="22"/></g></pattern></defs><rect width="1080" height="1920" fill="url(#pt)"/></svg>
+<div id="rays"></div>
+<div id="dust"></div>
+
+<div id="clipbox"><div id="hole"><div id="fallback"><h1 class="gold">שבת שלום</h1><p id="fbp"></p></div></div><div class="vig"></div></div>
+
+<div id="div"><div class="ln l"></div><div class="ln r"></div>
+<svg id="med" viewBox="0 0 120 120"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4cf"/><stop offset=".3" stop-color="#f1cf7c"/><stop offset=".55" stop-color="#b98a2e"/><stop offset=".75" stop-color="#f6dc95"/><stop offset="1" stop-color="#9a6f22"/></linearGradient></defs>
+<g transform="translate(60 60)"><g id="medrot"><polygon points="0,-56 11,-15 52,-26 20,4 40,42 0,22 -40,42 -20,4 -52,-26 -11,-15" fill="none" stroke="url(#g1)" stroke-width="2.5"/><polygon points="0,56 -11,15 -52,26 -20,-4 -40,-42 0,-22 40,-42 20,-4 52,26 11,15" fill="none" stroke="url(#g1)" stroke-width="1.2" opacity=".6"/></g>
+<circle r="30" fill="#070b16" stroke="url(#g1)" stroke-width="3"/><circle r="24" fill="none" stroke="url(#g1)" stroke-width="1" opacity=".7"/>
+<path d="M-9 -14 L-16 -2 L-2 -2Z M9 14 L16 2 L2 2Z M-16 2 L-9 14 L-2 2Z M16 -2 L9 -14 L2 -2Z" fill="url(#g1)" opacity="0"/>
+<g fill="none" stroke="url(#g1)" stroke-width="3"><path d="M0 -16 L13.9 8 L-13.9 8Z"/><path d="M0 16 L13.9 -8 L-13.9 -8Z"/></g></g></svg></div>
+
+<div id="title"><h2 class="gold">זמני שבת קודש<span id="shine">זמני שבת קודש</span></h2><div class="sub">פרשת <b class="gold" id="par"></b></div><div class="dt" id="dt"></div></div>
+
+<div id="tbox"><svg class="frame" viewBox="0 0 992 772" preserveAspectRatio="none"><defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4cf"/><stop offset=".3" stop-color="#f1cf7c"/><stop offset=".55" stop-color="#b98a2e"/><stop offset=".75" stop-color="#f6dc95"/><stop offset="1" stop-color="#9a6f22"/></linearGradient>
+<linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(20,30,56,.82)"/><stop offset="1" stop-color="rgba(6,9,18,.9)"/></linearGradient></defs>
+<path d="M60 26 H932 Q966 26 966 60 V712 Q966 746 932 746 H60 Q26 746 26 712 V60 Q26 26 60 26Z" fill="url(#gl)" stroke="url(#g2)" stroke-width="3"/>
+<path d="M72 40 H920 Q952 40 952 72 V700 Q952 732 920 732 H72 Q40 732 40 700 V72 Q40 40 72 40Z" fill="none" stroke="url(#g2)" stroke-width="1.2" opacity=".7"/>
+<g fill="none" stroke="url(#g2)" stroke-width="2.4">
+<path d="M26 120 C26 60 60 26 120 26 M26 96 C50 96 96 50 96 26"/><path d="M966 120 C966 60 932 26 872 26 M966 96 C942 96 896 50 896 26"/>
+<path d="M26 652 C26 712 60 746 120 746 M26 676 C50 676 96 722 96 746"/><path d="M966 652 C966 712 932 746 872 746 M966 676 C942 676 896 722 896 746"/></g>
+<g fill="url(#g2)"><circle cx="46" cy="46" r="7"/><circle cx="946" cy="46" r="7"/><circle cx="46" cy="726" r="7"/><circle cx="946" cy="726" r="7"/>
+<path d="M496 8 L510 26 L496 44 L482 26Z"/><path d="M496 728 L510 746 L496 764 L482 746Z"/></g></svg>
+<div class="page" id="pA"></div><div class="page" id="pB"></div>
+<div class="dots"><i id="dA"></i><i id="dB"></i></div></div>
+
+<div id="plaque"><div class="msg" id="m1"><span class="gold">שבת שלום ומבורך</span><span>מצוות</span><img src="nc-logo.svg"></div>
+<div class="msg" id="m2"><span>בניית</span><span class="gold">אתרים ומערכות ניהול</span></div>
+<div class="msg" id="m3"><span class="en gold">ncgraphics.site</span><span style="opacity:.5">|</span><span class="en">+44 7586 259995</span></div></div>
+<div id="note">הדלקת נרות: אנגליה 15 דק׳, שאר חו״ל 18 דק׳, ירושלים 40 דק׳ לפני השקיעה · מוצ״ש 8.5° · ר״ת 72 דק׳</div>
+<script>
+const D=__DATA__;const T=__TOTAL__;
+document.getElementById('par').textContent=D.parsha;document.getElementById('fbp').textContent='פרשת '+D.parsha;
+document.getElementById('dt').textContent=D.frihebdate.replace(/ תשפ.*$/,'')+' – '+D.hebdate;
+['pA','pB'].forEach((id,pi)=>{const P=D.pages[pi];let h='<div class="hrow"><div></div>'+P.map(c=>`<div>${c.city}</div>`).join('')+'</div>';
+  D.zrows.forEach((lb,ri)=>{const key=ri==0||ri>=6;h+=`<div class="zr${key?' key':''}"><div class="lb">${lb}</div>`+P.map(c=>`<div class="v ${key?'gold':'w'}">${c.vals[ri]}</div>`).join('')+'</div>';});
+  document.getElementById(id).innerHTML=h;});
+let seed=9;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;const DU=[];
+for(let i=0;i<120;i++){const e=document.createElement('div');e.className='d';const o={el:e,x:rnd()*1080,y:rnd()*1920,s:3+rnd()*rnd()*14,v:8+rnd()*26,p:rnd()*7,w:rnd()*2};e.style.width=e.style.height=o.s+'px';document.getElementById('dust').appendChild(e);DU.push(o);}
+const cl=v=>v<0?0:v>1?1:v,eo=t=>1-Math.pow(1-t,3),eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+function rise(el,t,d,dist=50,dur=.9){const k=eo(cl((t-d)/dur));el.style.opacity=k;el.style.transform=`translateY(${(1-k)*dist}px)`;}
+const PAGE=7;
+window.render=function(t){
+  DU.forEach(o=>{const y=((o.y-o.v*t)%1920+1920)%1920;o.el.style.transform=`translate(${o.x+Math.sin(t*.6+o.p)*18}px,${y}px)`;o.el.style.opacity=(.2+.8*(.5+.5*Math.sin(t*1.7+o.p)))*cl(t/1.5);});
+  document.getElementById('rays').style.transform=`rotate(${t*3}deg)`;
+  document.getElementById('medrot').setAttribute('transform',`rotate(${t*12})`);
+  // intro
+  const k=eo(cl(t/1.1));document.getElementById('clipbox').style.opacity=k;document.getElementById('clipbox').style.transform=`scale(${.94+.06*k})`;
+  rise(document.getElementById('div'),t,.4,20,.8);
+  const ti=document.getElementById('title');const kt=eo(cl((t-.6)/1));ti.style.opacity=kt;ti.style.transform=`translateY(${(1-kt)*40}px)`;ti.style.filter=`blur(${(1-kt)*8}px)`;
+  const sh=document.getElementById('shine');const sp=((t-1.4)%5)/1.6;sh.style.backgroundPosition=`${(1-cl(sp))*300-100}% 0`;sh.style.opacity=sp>=0&&sp<=1?1:0;
+  const tb=document.getElementById('tbox');const kb=eo(cl((t-1)/1.1));tb.style.opacity=kb;tb.style.transform=`perspective(1600px) rotateX(${(1-kb)*18}deg) translateY(${(1-kb)*60}px)`;
+  // pages with row cascade
+  const ph=Math.max(0,t-1.6)/PAGE, idx=Math.floor(ph)%2, f=ph%1;
+  ['pA','pB'].forEach((id,j)=>{const el=document.getElementById(id);const on=idx===j;const out=on?cl((1-f)/.07):0;el.style.opacity=on?Math.min(1,out):0;
+    const rows=el.children;for(let r=0;r<rows.length;r++){const kk=on?eo(cl((f*PAGE-r*.09)/.45)):0;rows[r].style.opacity=kk;rows[r].style.transform=`translateX(${(1-kk)*-40}px)`;}
+    document.getElementById(j?'dB':'dA').style.background=on?'#f1cf7c':'transparent';});
+  // plaque messages (fade, no scrolling)
+  const pl=document.getElementById('plaque');rise(pl,t,1.6,30,.8);
+  const ms=['m1','m2','m3'],M=4.2,mt=Math.max(0,t-1.8),mi=Math.floor(mt/M)%3,mf=(mt%M)/M;
+  ms.forEach((id,i)=>{const e=document.getElementById(id);const a=i===mi?cl(mf/.12)*cl((1-mf)/.12):0;e.style.opacity=a;e.style.transform=`translateY(${(1-a)*(i===mi&&mf<.5?18:-18)}px)`;});
+  rise(document.getElementById('note'),t,2.2,10,.6);
+  document.body.style.opacity=cl(t/.5)*cl((T-t)/.8);
+};
+render(0);
+</script></body></html>
