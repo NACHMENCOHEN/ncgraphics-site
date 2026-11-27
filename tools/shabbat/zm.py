@@ -22,6 +22,7 @@ for name,lat,lon,tz,off in CITIES:
 def h12(x):
     return f"{(x.hour-1)%12+1}:{x.minute:02d}"
 ZROWS=[("הדלקת נרות","fri","candles"),("שקיעה ער״ש","fri","shkia"),("סוזק״ש גר״א","sat","shma_gra"),("סוז״ת גר״א","sat","tfila_gra"),("חצות","sat","chatzos"),("שקיעה","sat","shkia"),("מוצאי שבת","sat","motzei"),("רבינו תם","sat","rt")]
+EN={'לונדון': 'London', "מנצ'סטר": 'Manchester', 'גייטסהד': 'Gateshead', 'אנטוורפן': 'Antwerp', 'ניו יורק': 'New York', 'לייקווד': 'Lakewood', 'מונטריאול': 'Montreal', 'ירושלים': 'Jerusalem'}
 pages=[]
 for pg in PAGES:
     cols=[]
@@ -29,7 +30,7 @@ for pg in PAGES:
         g=GeoLocation(name,lat,lon,tz,elevation=0)
         f_=ZmanimCalendar(geo_location=g,date=fri,candle_lighting_offset=off);s_=ZmanimCalendar(geo_location=g,date=sat)
         v={"fri":{"candles":f_.candle_lighting(),"shkia":f_.sunset()},"sat":{"shma_mga":s_.sof_zman_shma_mga(),"shma_gra":s_.sof_zman_shma_gra(),"tfila_gra":s_.sof_zman_tfila_gra(),"chatzos":s_.chatzos(),"shkia":s_.sunset(),"motzei":s_.tzais({'degrees':8.5}),"rt":s_.tzais_72()}}
-        cols.append({"city":name,"vals":[h12(v[d][k]) for _,d,k in ZROWS]})
+        cols.append({"city":name,"en":EN.get(name,""),"vals":[h12(v[d][k]) for _,d,k in ZROWS]})
     pages.append(cols)
 hd=dates.GregorianDate(sat.year,sat.month,sat.day).to_heb()
 parsha=parshios.getparsha_string(hd,israel=False,hebrew=True)
