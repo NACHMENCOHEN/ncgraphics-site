@@ -131,7 +131,7 @@ footer .logo img{height:40px}
 .trust b{font-family:var(--display);font-size:30px;color:var(--white);line-height:1.1}
 .trust div>span{font-size:13.5px;color:var(--soft);font-weight:600}
 .stage{position:relative;aspect-ratio:1.12;perspective:1100px}
-.scr{position:absolute;border-radius:14px;overflow:hidden;background:#0d1430;border:1px solid rgba(148,174,230,.22);box-shadow:0 40px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.02)}
+.scr{position:absolute;border-radius:14px;overflow:hidden;background:#0d1430;border:1px solid rgba(148,174,230,.22);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
 .scr .bar{display:flex;align-items:center;gap:6px;height:26px;padding:0 12px;background:#111a38;border-bottom:1px solid var(--line);font-size:11px;color:var(--soft)}
 .scr .bar i{width:8px;height:8px;border-radius:50%;background:#2a3762}
 .scr .bar em{font-style:normal;margin-left:8px}
@@ -312,8 +312,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
 
 /* 3D layer */
 #wave{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1.6s ease}
-#wave{-webkit-mask:linear-gradient(90deg,transparent 0,transparent 38%,#000 62%);mask:linear-gradient(90deg,transparent 0,transparent 38%,#000 62%)}
-@media (max-width:980px){#wave{-webkit-mask:linear-gradient(180deg,transparent 0,transparent 58%,#000 75%);mask:linear-gradient(180deg,transparent 0,transparent 58%,#000 75%)}}
 #wave.on{opacity:1}
 .hero .bgfx::before{opacity:.25}
 .t3d{transform-style:preserve-3d}
@@ -331,7 +329,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
 .dk-stage .quote.out-r{transform:translateX(160px) rotateY(-28deg) rotate(3deg)!important}
 
 /* scroll story */
-.story{position:relative;height:340vh;background:linear-gradient(180deg,var(--bg),#060a17 50%,var(--bg))}
+.story{position:relative;height:250vh;background:linear-gradient(180deg,var(--bg),#060a17 50%,var(--bg))}
 .story .pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .story .pin::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 55%,rgba(46,196,241,.16),transparent 70%);pointer-events:none}
 .st-caps{position:absolute;top:clamp(84px,13vh,140px);left:0;right:0;text-align:center;padding:0 20px;z-index:5;height:150px}
@@ -341,13 +339,13 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
 .st-cap b{display:block;font-family:var(--display);font-weight:800;color:var(--white);font-size:clamp(30px,4.4vw,60px);line-height:1.05;letter-spacing:-.02em}
 .st-cap b span{background:linear-gradient(90deg,#7fe3ff,var(--acc) 45%,#5b8cff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .st-scene{position:relative;width:min(1100px,74vw);aspect-ratio:16/10;margin-top:clamp(120px,16vh,170px);perspective:1400px;transform-style:preserve-3d}
-.st-scr{position:absolute;inset:0;border-radius:14px;overflow:hidden;background:#0d1430;border:1px solid rgba(148,174,230,.28);box-shadow:0 60px 120px -40px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.03),0 0 80px -20px rgba(46,196,241,.35);transform-origin:50% 60%;backface-visibility:hidden}
+.st-scr{position:absolute;inset:0;border-radius:14px;overflow:hidden;background:#0d1430;border:1px solid rgba(148,174,230,.28);box-shadow:0 40px 70px -30px rgba(0,0,0,.9);transform-origin:50% 60%;backface-visibility:hidden;will-change:transform,opacity;contain:paint}
 .st-scr .bar{display:flex;align-items:center;gap:6px;height:28px;padding:0 12px;background:#111a38;border-bottom:1px solid var(--line);font-size:12px;color:var(--soft)}
 .st-scr .bar i{width:8px;height:8px;border-radius:50%;background:#2a3762}.st-scr .bar em{font-style:normal;margin-left:8px}
 .st-scr img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top}
 .st-prog{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);width:160px;height:3px;border-radius:3px;background:rgba(148,174,230,.2);overflow:hidden}
 .st-prog i{display:block;height:100%;width:0;background:var(--acc)}
-@media (max-width:700px){.story{height:300vh}.st-scene{width:88vw;margin-top:150px}.st-caps{top:90px}}
+@media (max-width:700px){.story{height:220vh}.st-scene{width:88vw;margin-top:150px}.st-caps{top:90px}}
 @media (prefers-reduced-motion:reduce){.story{height:auto}.story .pin{position:relative;height:auto;padding:80px 0}}
 
 @media (min-width:1600px){.hero h1{font-size:clamp(74px,5vw,96px)}.lede{font-size:20px;max-width:62ch}h2{font-size:clamp(58px,3.6vw,70px)}.cards,.secg,.steps,.packs,.webs{gap:26px}.card,.pack{padding:40px 36px}}
@@ -422,9 +420,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
       <div class="st-cap"><small>NC Graphics</small><b>One studio. <span>29 institutions.</span></b></div>
     </div>
     <div class="st-scene" id="stScene">
-      <div class="st-scr" data-i="0"><div class="bar"><i></i><i></i><i></i><em>Cheder management system</em></div><img src="img/cheder.webp" width="1600" height="1000" alt="Cheder management system" decoding="async"></div>
-      <div class="st-scr" data-i="1"><div class="bar"><i></i><i></i><i></i><em>Beis Medrash finance system</em></div><img src="img/beismedrash.webp" width="1600" height="1000" alt="Beis Medrash finance system" decoding="async"></div>
-      <div class="st-scr" data-i="2"><div class="bar"><i></i><i></i><i></i><em>School finance system</em></div><img src="img/finance.webp" width="1600" height="1000" alt="School finance system" decoding="async"></div>
+      <div class="st-scr" data-i="0"><div class="bar"><i></i><i></i><i></i><em>Cheder management system</em></div><img src="img/cheder.webp" width="1600" height="1000" alt="Cheder management system" decoding="async" loading="lazy"></div>
+      <div class="st-scr" data-i="1"><div class="bar"><i></i><i></i><i></i><em>Beis Medrash finance system</em></div><img src="img/beismedrash.webp" width="1600" height="1000" alt="Beis Medrash finance system" decoding="async" loading="lazy"></div>
+      <div class="st-scr" data-i="2"><div class="bar"><i></i><i></i><i></i><em>School finance system</em></div><img src="img/finance.webp" width="1600" height="1000" alt="School finance system" decoding="async" loading="lazy"></div>
     </div>
     <div class="st-prog" aria-hidden="true"><i id="stProg"></i></div>
   </div>
@@ -586,21 +584,22 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
         'float c=cos(0.32),s=sin(0.32);q=vec3(q.x,q.y*c-q.z*s,q.y*s+q.z*c);'+
         'float zz=q.z+2.2;gl_Position=vec4(q.x/(zz*asp)*1.6,q.y/zz*1.6+0.05,0.0,1.0);'+
         'gl_PointSize=ps*(3.2/zz);a=clamp(1.0-p.y,0.0,1.0)*smoothstep(0.0,0.25,p.y)*smoothstep(1.0,0.75,abs(p.x));}';
-      var fs='precision mediump float;varying float a;varying float h;void main(){vec2 d=gl_PointCoord-0.5;float r=dot(d,d);if(r>0.25)discard;'+
-        'vec3 c=mix(vec3(0.23,0.35,1.0),vec3(0.18,0.77,0.95),clamp(h*1.4+0.5,0.0,1.0));gl_FragColor=vec4(c,a*(1.0-r*4.0));}';
+      var fs='precision mediump float;varying float a;varying float h;uniform vec2 rs;uniform float mob;void main(){vec2 d=gl_PointCoord-0.5;float r=dot(d,d);if(r>0.25)discard;'+
+        'float fd=mob>0.5?smoothstep(0.44,0.26,gl_FragCoord.y/rs.y):smoothstep(0.36,0.62,gl_FragCoord.x/rs.x);'+
+        'vec3 c=mix(vec3(0.23,0.35,1.0),vec3(0.18,0.77,0.95),clamp(h*1.4+0.5,0.0,1.0));gl_FragColor=vec4(c,a*(1.0-r*4.0)*fd);}';
       function sh(t,src){var o=gl.createShader(t);gl.shaderSource(o,src);gl.compileShader(o);return o;}
       var pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);
       if(!gl.getProgramParameter(pr,gl.LINK_STATUS))return;gl.useProgram(pr);
       var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,pts,gl.STATIC_DRAW);
       var loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
-      var uT=gl.getUniformLocation(pr,'t'),uM=gl.getUniformLocation(pr,'m'),uA=gl.getUniformLocation(pr,'asp'),uP=gl.getUniformLocation(pr,'ps');
+      var uR=gl.getUniformLocation(pr,'rs'),uMo=gl.getUniformLocation(pr,'mob'),uT=gl.getUniformLocation(pr,'t'),uM=gl.getUniformLocation(pr,'m'),uA=gl.getUniformLocation(pr,'asp'),uP=gl.getUniformLocation(pr,'ps');
       gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);
-      var dpr=1,W,H;
-      function rs(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;gl.viewport(0,0,cv.width,cv.height);gl.uniform1f(uA,W/H);gl.uniform1f(uP,(small?3.0:4.0)*dpr);}
+      var dpr=.6,W,H;
+      function rs(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;gl.viewport(0,0,cv.width,cv.height);gl.uniform2f(uR,cv.width,cv.height);gl.uniform1f(uMo,innerWidth<=980?1:0);gl.uniform1f(uA,W/H);gl.uniform1f(uP,(small?3.0:4.0)*dpr);}
       rs();addEventListener('resize',rs);
       var mx=0,my=0,tx=0,ty=0;if(fine)addEventListener('mousemove',function(e){tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5;},{passive:true});
       var vis=true,t0=performance.now(),run=false;
-      function frame(now){if(!vis||document.hidden){run=false;return;}mx+=(tx-mx)*.05;my+=(ty-my)*.05;
+      var last=0;function frame(now){if(!vis||document.hidden){run=false;return;}if(now-last<32){requestAnimationFrame(frame);return;}last=now;mx+=(tx-mx)*.05;my+=(ty-my)*.05;
         gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.uniform1f(uT,(now-t0)/1000);gl.uniform2f(uM,mx,my);gl.drawArrays(gl.POINTS,0,NX*NZ);
         requestAnimationFrame(frame);}
       function start(){if(!run&&vis&&!document.hidden){run=true;requestAnimationFrame(frame);}}
