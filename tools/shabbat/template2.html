@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"FRL";font-weight:500;src:url(node_modules/@fontsource/frank-ruhl-libre/files/frank-ruhl-libre-hebrew-500-normal.woff2)}
+@font-face{font-family:"FRL";font-weight:900;src:url(node_modules/@fontsource/frank-ruhl-libre/files/frank-ruhl-libre-hebrew-900-normal.woff2)}
+@font-face{font-family:"Heebo";font-weight:700;src:url(node_modules/@fontsource/heebo/files/heebo-hebrew-700-normal.woff2)}
+@font-face{font-family:"Heebo";font-weight:800;src:url(node_modules/@fontsource/heebo/files/heebo-hebrew-800-normal.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+body{font-family:"Heebo",sans-serif;position:relative}
+/* ---------- top: candles / NC promo ---------- */
+#top{position:absolute;left:0;right:0;top:0;height:608px;overflow:hidden;background:radial-gradient(700px 500px at 50% 70%,rgba(255,170,70,.35),transparent 65%),linear-gradient(180deg,#120b05,#1d1208 60%,#0d0804)}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#sA h1{font-family:"FRL";font-weight:900;font-size:150px;line-height:1;background:linear-gradient(180deg,#fff6df,#f3c36b 55%,#c9862c);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 30px rgba(255,170,70,.45))}
+#sA p{font-family:"FRL";font-weight:500;font-size:48px;color:#f7e6c4;margin-top:10px}
+#cands{position:relative;width:400px;height:170px;margin-top:6px}
+.cand{position:absolute;bottom:22px;width:40px;height:110px;border-radius:7px;background:linear-gradient(90deg,#e9e2d3,#fffaf0 45%,#d9d0bd)}
+.flame{position:absolute;width:32px;height:66px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(ellipse at 50% 75%,#fff 0 18%,#ffe7a3 32%,#ffb347 55%,rgba(255,120,30,0) 72%);transform-origin:50% 90%}
+.halo{position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,190,90,.45),rgba(255,160,60,0) 65%)}
+.hold{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:300px;height:30px;border-radius:15px;background:linear-gradient(180deg,#f0d28c,#9c7631)}
+#sB{background:linear-gradient(180deg,#06121a,#0b2730)}
+#sB .row{display:flex;align-items:center;gap:34px}
+#sB img.lg{width:520px}
+#sB .tag{margin-top:22px;font-size:44px;font-weight:800;color:#fff}
+#sB .tag span{color:#2BB3B8}
+#sB .scr{position:absolute;width:420px;border-radius:12px;overflow:hidden;border:2px solid rgba(148,174,230,.3);box-shadow:0 30px 60px -20px rgba(0,0,0,.9)}
+#sB .scr img{display:block;width:100%}
+#sB .url{margin-top:14px;font-size:34px;font-weight:700;color:#f3c36b;direction:ltr}
+/* ---------- bottom: palace panel ---------- */
+#pal{position:absolute;left:0;right:0;top:608px;bottom:0;overflow:hidden;background:radial-gradient(600px 500px at 15% 30%,rgba(214,168,74,.35),transparent 70%),radial-gradient(600px 600px at 85% 60%,rgba(214,168,74,.30),transparent 70%),radial-gradient(500px 400px at 50% 95%,rgba(214,168,74,.25),transparent 70%),#0a0703}
+#spark{position:absolute;inset:0}
+.sp{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff6d0,#f2c464 40%,rgba(242,196,100,0) 70%)}
+#beam{position:absolute;left:0;right:0;top:0;height:22px;background:linear-gradient(180deg,#f6e2a8,#b9913f 60%,#7a5a1f);box-shadow:0 6px 18px rgba(0,0,0,.6)}
+.col{position:absolute;top:22px;bottom:150px;width:150px}
+.col .cap{position:absolute;top:0;left:-18px;right:-18px;height:74px;background:linear-gradient(180deg,#fbf0cc,#d9b56a 40%,#a07c33);border-radius:8px 8px 28px 28px;box-shadow:inset 0 -10px 0 rgba(0,0,0,.18)}
+.col .cap::before,.col .cap::after{content:"";position:absolute;top:22px;width:44px;height:44px;border-radius:50%;border:8px solid #b58f45;background:#e9cf8f}
+.col .cap::before{left:-8px}.col .cap::after{right:-8px}
+.col .shaft{position:absolute;top:74px;bottom:80px;left:12px;right:12px;background:repeating-linear-gradient(90deg,#fff3cf 0 9px,#d6b46d 9px 15px,#b18d47 15px 18px,#e8cf92 18px 26px);box-shadow:inset 8px 0 18px rgba(255,255,255,.35),inset -14px 0 22px rgba(0,0,0,.35)}
+.col .base{position:absolute;bottom:0;left:-12px;right:-12px;height:80px;background:linear-gradient(180deg,#f3dfa4,#b38f45);border-radius:6px;box-shadow:inset 0 10px 0 rgba(255,255,255,.25)}
+#cl{left:24px}#cr{right:24px}
+#carpet{position:absolute;left:0;right:0;bottom:0;height:150px;background:linear-gradient(180deg,#7b0d12,#a8141b 40%,#5d090c);border-top:6px solid #e0b75c}
+#carpet::before{content:"";position:absolute;left:30px;right:30px;top:16px;bottom:16px;border:3px solid rgba(224,183,92,.7)}
+#board{position:absolute;top:58px;left:200px;right:200px;bottom:208px;background:linear-gradient(180deg,#fffaf0,#f5ecd8);border-radius:10px;box-shadow:0 30px 60px -10px rgba(0,0,0,.8),0 0 0 6px #c9a456,0 0 0 9px #fff3cc;padding:0 26px}
+#cart{position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:440px;height:108px;border-radius:54px;background:linear-gradient(180deg,#fff6dc,#e7cc8c 50%,#b8913f);box-shadow:0 10px 24px rgba(0,0,0,.5),inset 0 0 0 5px #fff3cc,inset 0 0 0 9px #a8832f;display:grid;place-items:center}
+#cart b{font-family:"FRL";font-weight:900;font-size:66px;color:#5b3a0c;text-shadow:0 2px 0 #fff2c8}
+#date{margin-top:94px;text-align:center;font-family:"FRL";font-weight:900;font-size:46px;color:#3a2a10}
+#date small{display:block;font-family:"Heebo";font-weight:700;font-size:28px;color:#8a6a2c;margin-top:2px}
+.tbl{position:absolute;left:26px;right:26px;top:226px}
+.hd{display:grid;grid-template-columns:1.35fr repeat(4,1fr);gap:8px;margin-bottom:10px}
+.hd div{height:46px;display:grid;place-items:center;font-weight:800;font-size:24px;border-radius:4px}
+.hd .city{background:#d9b85a;color:#2b1f06}
+.zr{display:grid;grid-template-columns:1.35fr repeat(4,1fr);gap:8px;margin-bottom:10px;height:72px}
+.zr .lb{background:#fff;border:3px solid #b99547;border-radius:6px;display:grid;place-items:center;font-weight:800;font-size:25px;color:#2b1f06;white-space:nowrap}
+.zr .v{border-radius:4px;display:grid;place-items:center;font-family:"Heebo";font-weight:800;font-size:44px;direction:ltr;color:#2a1c05}
+.pA .zr .v{background:linear-gradient(180deg,#a2954f,#8b7e3c);color:#fff}
+.pA .zr:nth-child(odd) .v{background:linear-gradient(180deg,#d8cfae,#c8bd95);color:#2a1c05}
+.pB .zr .v{background:linear-gradient(180deg,#7a2a35,#5e1d27);color:#fff}
+.pB .zr:nth-child(odd) .v{background:linear-gradient(180deg,#e2cfcf,#d4bcbc);color:#2a1c05}
+.pB .hd .city{background:#7a2a35;color:#fff}
+.zr .v.hi{box-shadow:inset 0 0 0 3px #f3c36b}
+#fn{position:absolute;left:0;right:0;bottom:16px;text-align:center;font-size:20px;color:#6b5a3a;font-weight:700}
+#tick{position:absolute;left:0;right:0;bottom:96px;height:70px;background:#fff200;border-top:4px solid #000;border-bottom:4px solid #000;overflow:hidden;z-index:5}
+#tick .tt{position:absolute;top:0;height:62px;display:flex;align-items:center;white-space:nowrap;font-weight:800;font-size:40px;color:#000;direction:ltr}
+#tick .tt>span{direction:rtl;padding:0 50px;flex:none}
+#tick .tt span b{color:#b4141b}
+</style></head><body>
+<div id="top">
+  <div class="slide" id="sA"><h1>שבת שלום</h1><p id="par"></p>
+    <div id="cands"><div class="halo" id="h1"></div><div class="halo" id="h2"></div><div class="hold"></div><div class="cand" id="c1"></div><div class="cand" id="c2"></div><div class="flame" id="f1"></div><div class="flame" id="f2"></div></div></div>
+  <div class="slide" id="sB"><div class="scr" id="sc1"><img src="cheder.webp"></div><div class="scr" id="sc2"><img src="goldclean.webp"></div>
+    <img class="lg" src="nc-logo.svg" style="position:relative"><div class="tag" style="position:relative">בניית <span>אתרים</span> ו<span>מערכות ניהול</span></div><div class="url" style="position:relative">ncgraphics.site</div></div>
+</div>
+<div id="pal">
+  <div id="spark"></div>
+  <div id="beam"></div>
+  <div class="col" id="cl"><div class="cap"></div><div class="shaft"></div><div class="base"></div></div>
+  <div class="col" id="cr"><div class="cap"></div><div class="shaft"></div><div class="base"></div></div>
+  <div id="carpet"></div>
+  <div id="board"><div id="cart"><b>זמני שבת</b></div>
+    <div id="date"></div>
+    <div class="tbl pA" id="pA"></div><div class="tbl pB" id="pB"></div>
+    <div id="fn">הדלקת נרות: אנגליה 15 דק׳, חו״ל 18 דק׳, ירושלים 40 דק׳ לפני השקיעה · מוצ״ש 8.5° · ר״ת 72 דק׳</div></div>
+  <div id="tick"><div class="tt" id="tt"></div></div>
+</div>
+<script>
+const D=__DATA__;const T=__TOTAL__;
+document.getElementById('par').textContent='פרשת '+D.parsha;
+document.getElementById('date').innerHTML='שבת קודש פרשת '+D.parsha+'<small>'+D.frihebdate.replace(/ תשפ.*$/,'')+' – '+D.hebdate+'</small>';
+['pA','pB'].forEach((id,pi)=>{const el=document.getElementById(id);const P=D.pages[pi];
+  let h='<div class="hd"><div></div>'+P.map(c=>`<div class="city">${c.city}</div>`).join('')+'</div>';
+  D.zrows.forEach((lb,ri)=>{h+=`<div class="zr"><div class="lb">${lb}</div>`+P.map(c=>`<div class="v${ri==0||ri>=6?' hi':''}">${c.vals[ri]}</div>`).join('')+'</div>';});
+  el.innerHTML=h;});
+const msg='<span><b>שבת שלום ומבורך</b> מצוות NC Graphics</span><span>◆</span><span>בניית אתרים ומערכות ניהול לחדרים, בתי כנסת ובתי ספר</span><span>◆</span><span>ncgraphics.site · <span dir="ltr">+44 7586 259995</span></span><span>◆</span>';
+const tt=document.getElementById('tt');tt.innerHTML=(msg).repeat(3);
+let seed=5;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;const SP=[];
+for(let i=0;i<260;i++){const s=document.createElement('div');s.className='sp';const o={el:s,x:rnd()*1080,y:rnd()*1320,sz:5+rnd()*rnd()*34,p:rnd()*7,v:6+rnd()*22};s.style.width=s.style.height=o.sz+'px';document.getElementById('spark').appendChild(s);SP.push(o);}
+const cl=v=>v<0?0:v>1?1:v,eo=t=>1-Math.pow(1-t,3),eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const cx=[200-70,200+70];
+['c1','c2'].forEach((id,i)=>document.getElementById(id).style.left=(cx[i]-20)+'px');
+// page timing: A then B then A ...  slide timing for top
+const PAGE=6.5;
+window.render=function(t){
+  SP.forEach(o=>{const y=(o.y-o.v*t+1400)%1400;o.el.style.transform=`translate(${o.x}px,${y}px)`;o.el.style.opacity=.25+.75*(.5+.5*Math.sin(t*2+o.p));});
+  // pages
+  const ph=t/PAGE, idx=Math.floor(ph)%2, f=ph%1;
+  const A=document.getElementById('pA'),B=document.getElementById('pB');
+  const fade=x=>cl(x/0.08)*cl((1-x)/0.08);
+  const vA=idx===0?fade(f):0, vB=idx===1?fade(f):0;
+  A.style.opacity=vA;B.style.opacity=vB;
+  [A,B].forEach((el,j)=>{const v=j===0?vA:vB;el.style.transform=`perspective(1400px) rotateY(${(1-v)*25}deg)`;});
+  // intro
+  const k=eo(cl(t/1));document.getElementById('board').style.transform=`translateY(${(1-k)*120}px)`;document.getElementById('board').style.opacity=k;
+  document.getElementById('cart').style.transform=`translateX(-50%) scale(${.8+.2*eo(cl((t-.3)/.7))})`;
+  // ticker
+  const W=tt.scrollWidth/3;tt.style.left=(-W)+'px';tt.style.transform=`translateX(${(t*140)%W}px)`;
+  // top slides: A for 0-9, B 9-15, A 15-...
+  const cyc=t%15, showB=cyc>9;const tb=showB?cl((cyc-9)/.5)*cl((15-cyc)/.5):0;
+  document.getElementById('sB').style.opacity=tb;document.getElementById('sA').style.opacity=1-tb;
+  const s1=document.getElementById('sc1'),s2=document.getElementById('sc2');
+  s1.style.transform=`translate(${-300+Math.sin(t*.7)*10}px,${40}px) rotate(-8deg) scale(.9)`;s1.style.left='0px';s1.style.top='120px';s1.style.opacity=.35;
+  s2.style.transform=`translate(${300+Math.cos(t*.6)*10}px,${40}px) rotate(8deg) scale(.9)`;s2.style.right='0px';s2.style.top='120px';s2.style.opacity=.35;
+  ['f1','f2'].forEach((id,i)=>{const fl=document.getElementById(id);const lit=cl((t-.6-i*.3)/.5);const q=Math.sin(t*9+i*2)*.06+Math.sin(t*23+i)*.03;
+    fl.style.left=(cx[i]-16)+'px';fl.style.top=(170-22-110-66-4)+'px';fl.style.opacity=lit;fl.style.transform=`scale(${(.4+.6*lit)*(1+q)},${(.4+.6*lit)*(1-q*1.3)})`;
+    const h=document.getElementById(['h1','h2'][i]);h.style.left=(cx[i]-130)+'px';h.style.top=(170-22-110-170)+'px';h.style.opacity=lit*(.85+.15*Math.sin(t*7+i));});
+  document.body.style.opacity=cl(t/.5)*cl((T-t)/.8);
+};
+render(0);
+</script></body></html>
